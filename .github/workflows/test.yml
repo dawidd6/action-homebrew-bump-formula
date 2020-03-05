@@ -1,0 +1,19 @@
+name: Test Action
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Test
+        uses: ./
+        with:
+          token: ${{secrets.TOKEN}}
+          formula: dawidd6/homebrew-test/actions-updater
+          url: "https://github.com/dawidd6/actions-updater/archive/v0.1.12.tar.gz"
