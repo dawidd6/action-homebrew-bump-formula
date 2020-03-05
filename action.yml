@@ -20,6 +20,9 @@ inputs:
   revision:
     description: Git revision
     required: false
+  force:
+    description: Check open PRs or not
+    required: false
 runs:
   using: docker
   image: Dockerfile
