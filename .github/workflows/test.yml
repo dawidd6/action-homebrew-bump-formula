@@ -15,5 +15,12 @@ jobs:
         uses: ./
         with:
           token: ${{secrets.TOKEN}}
-          formula: dawidd6/homebrew-test/actions-updater
+          formula: dawidd6/homebrew-test/test-formula-url
           url: "https://github.com/dawidd6/actions-updater/archive/v0.1.12.tar.gz"
+      - name: Test
+        uses: ./
+        with:
+          token: ${{secrets.TOKEN}}
+          formula: dawidd6/homebrew-test/test-formula-git-revision
+          tag: v0.3.3
+          revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
