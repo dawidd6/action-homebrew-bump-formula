@@ -9,6 +9,7 @@ formula="$INPUT_FORMULA"
 url="$INPUT_URL"
 tag="$INPUT_TAG"
 revision="$INPUT_REVISION"
+force="$INPUT_FORCE"
 
 if test -n "$url" && test -n "$tag" && test -n "$revision"; then
     echo "Don't specify 'url', 'tag' and 'revision' together."
@@ -45,8 +46,20 @@ git config --global user.name "$actor"
 
 export HOMEBREW_GITHUB_API_TOKEN="$token"
 
-if test -n "$url"; then
-    brew bump-formula-pr --no-browse --no-audit --url="$url" "$formula"
-elif test -n "$tag" && test -n "$revision"; then
-    brew bump-formula-pr --no-browse --no-audit --tag="$tag" --revision="$revision" "$formula"
+args=(
+    --no-browse
+    --no-audit
+)
+
+if test -n "$force"; then
+    args+=(--force)
 fi
+
+if test -n "$url"; then
+    args+=(--url="$url")
+elif test -n "$tag" && test -n "$revision"; then
+    args+=(--tag="$tag")
+    args+=(--revision="$revision")
+fi
+
+brew bump-formula-pr "${args[@]}" "$formula"
