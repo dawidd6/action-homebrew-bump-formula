@@ -14,6 +14,9 @@ inputs:
   url:
     description: URL to download source archive
     required: false
+  mirror:
+    description: URL to download source archive (mirror)
+    required: false
   sha256:
     description: Source archive SHA256 checksum
     required: false
