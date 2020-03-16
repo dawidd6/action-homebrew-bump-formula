@@ -7,6 +7,7 @@ actor="$GITHUB_ACTOR"
 token="$INPUT_TOKEN"
 formula="$INPUT_FORMULA"
 url="$INPUT_URL"
+mirror="$INPUT_MIRROR"
 sha256="$INPUT_SHA256"
 tag="$INPUT_TAG"
 revision="$INPUT_REVISION"
@@ -32,8 +33,18 @@ if test -n "$tag" && test -n "$sha256"; then
     exit 1
 fi
 
+if test -n "$tag" && test -n "$mirror"; then
+    echo "Can't specify 'tag' and 'mirror' together"
+    exit 1
+fi
+
 if test -n "$revision" && test -n "$sha256"; then
     echo "Can't specify 'revision' and 'sha256' together"
+    exit 1
+fi
+
+if test -n "$revision" && test -n "$mirror"; then
+    echo "Can't specify 'revision' and 'mirror' together"
     exit 1
 fi
 
@@ -62,6 +73,9 @@ if test -n "$force"; then
 fi
 if test -n "$url"; then
     args+=(--url="$url")
+fi
+if test -n "$mirror"; then
+    args+=(--mirror="$mirror")
 fi
 if test -n "$sha256"; then
     args+=(--sha256="$sha256")
