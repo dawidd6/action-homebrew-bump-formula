@@ -66,7 +66,7 @@ fi
 args=(
     --no-browse
     --no-audit
-    --message='[`action-bump-homebrew-formula`](https://github.com/dawidd6/action-bump-homebrew-formula)'
+    --message='[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
 )
 
 if test -n "$force"; then
