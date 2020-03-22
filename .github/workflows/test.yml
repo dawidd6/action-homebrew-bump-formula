@@ -16,7 +16,7 @@ jobs:
         with:
           token: ${{secrets.TOKEN}}
           formula: dawidd6/homebrew-test/test-formula-url
-          url: "https://github.com/dawidd6/actions-updater/archive/v0.1.12.tar.gz"
+          url: https://github.com/dawidd6/actions-updater/archive/v0.1.12.tar.gz
       - name: Test
         uses: ./
         with:
