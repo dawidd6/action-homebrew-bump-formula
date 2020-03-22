@@ -20,7 +20,7 @@ Example of bumping any formula in any user tap:
 ```yaml
 - name: Get tag
   id: tag
-  run: echo "::set-output name=tag::${GITHUB_REF##*/}"
+  uses: dawidd6/action-get-tag@master
 
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@master
@@ -35,7 +35,7 @@ Example of bumping [`lazygit`](https://github.com/jesseduffield/lazygit) formula
 ```yaml
 - name: Get tag
   id: tag
-  run: echo "::set-output name=tag::${GITHUB_REF##*/}"
+  uses: dawidd6/action-get-tag@master
 
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@master
@@ -60,7 +60,7 @@ Example of bumping [`lazydocker`](https://github.com/jesseduffield/lazdockert) f
 ```yaml
 - name: Get tag
   id: tag
-  run: echo "::set-output name=tag::${GITHUB_REF##*/}"
+  uses: dawidd6/action-get-tag@master
 
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@master
