@@ -20,10 +20,10 @@ Example of bumping any formula in any user tap:
 ```yaml
 - name: Get tag
   id: tag
-  uses: dawidd6/action-get-tag@master
+  uses: dawidd6/action-get-tag@v1
 
 - name: Update Homebrew formula
-  uses: dawidd6/action-homebrew-bump-formula@master
+  uses: dawidd6/action-homebrew-bump-formula@v1
   with:
     token: ${{secrets.GITHUB_PAT}}
     formula: USER/REPO/FORMULA
@@ -35,10 +35,10 @@ Example of bumping [`lazygit`](https://github.com/jesseduffield/lazygit) formula
 ```yaml
 - name: Get tag
   id: tag
-  uses: dawidd6/action-get-tag@master
+  uses: dawidd6/action-get-tag@v1
 
 - name: Update Homebrew formula
-  uses: dawidd6/action-homebrew-bump-formula@master
+  uses: dawidd6/action-homebrew-bump-formula@v1
   with:
     token: ${{secrets.GITHUB_PAT}}
     formula: lazygit
@@ -60,10 +60,10 @@ Example of bumping [`lazydocker`](https://github.com/jesseduffield/lazdockert) f
 ```yaml
 - name: Get tag
   id: tag
-  uses: dawidd6/action-get-tag@master
+  uses: dawidd6/action-get-tag@v1
 
 - name: Update Homebrew formula
-  uses: dawidd6/action-homebrew-bump-formula@master
+  uses: dawidd6/action-homebrew-bump-formula@v1
   with:
     token: ${{secrets.GITHUB_PAT}}
     formula: lazydocker
