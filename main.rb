@@ -24,7 +24,6 @@ module Homebrew
   formula = ENV['INPUT_FORMULA']
   tag = ENV['INPUT_TAG']
   revision = ENV['INPUT_REVISION']
-  tap = ENV['INPUT_TAP']
   force = ENV['INPUT_FORCE']
 
   # Die if required inputs are not provided
@@ -39,10 +38,8 @@ module Homebrew
   brew 'update-reset'
 
   # Tap if desired
-  unless tap.blank?
-    formula = "#{tap}/#{formula}"
-    brew 'tap', tap
-  end
+  tap = formula.match(%r{^(.+/.+)/.+$})
+  brew 'tap', tap if tap
 
   # Get info about formula
   stable = Formula[formula].stable
