@@ -30,6 +30,8 @@ Example of bumping any formula in any user tap:
     url: "https://github.com/USER/REPO/archive/${{steps.tag.outputs.tag}}.tar.gz"
 ```
 
+**note:** `USER/REPO/FORMULA` can be in the form that `brew install` would accept it. That is, for formula "baz" in foo's tap repo "homebrew-bar", one could use `foo/bar/baz` instead of `foo/homebrew-bar/baz`. This is because homebrew expects tap names to have the `homebrew-` prefix.
+
 Example of bumping [`lazygit`](https://github.com/jesseduffield/lazygit) formula in [`Homebrew/homebrew-core`](https://github.com/Homebrew/homebrew-core) tap:
 
 ```yaml
