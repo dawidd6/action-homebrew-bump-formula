@@ -9,21 +9,39 @@ inputs:
     description: Github token (not the default one)
     required: true
   formula:
-    description: Formula name
+    description: |
+      Formula name
+
+      Example: lazygit
     required: true
   tap:
-    description: Formula tap
+    description: |
+      Formula tap
+
+      Defaults to homebrew/core
+
+      Example: dawidd6/tap
+      Example: dawidd6/homebrew-tap
     required: false
   tag:
-    description: Git tag
+    description: |
+      Git tag
+
+      Example: v1.0.0
+      Example: refs/tags/v1.0.0
     required: false
     default: ${{github.ref}}
   revision:
-    description: Git revision
+    description: |
+      Git revision
+
+      Only required for formulae that use git to download the source
+
+      Example: 130d3a3af72f66780ae4e24cd143ae7a4d757f9d
     required: false
     default: ${{github.sha}}
   force:
-    description: Check open PRs or not
+    description: Check open PRs or not (will fail if detected)
     required: false
 runs:
   using: docker
