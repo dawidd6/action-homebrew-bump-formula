@@ -10,6 +10,12 @@ jobs:
         formula:
           - test-formula-url
           - test-formula-git-revision
+        include:
+          - formula: test-formula-url
+            tag: v0.1.12
+          - formula: test-formula-git-revision
+            tag: v0.3.3
+            sha: c43abd765cf51c06bbcaa5479dc49aab1396989f
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -19,3 +25,5 @@ jobs:
           token: ${{secrets.TOKEN}}
           formula: ${{matrix.formula}}
           tap: dawidd6/homebrew-test
+        env:
+          GITHUB_REF: refs/tags/${{matrix.tag}}
