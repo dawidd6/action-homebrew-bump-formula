@@ -27,13 +27,6 @@ module Homebrew
   ref = ENV['GITHUB_REF']
   revision = ENV['GITHUB_SHA']
 
-  # Print stuff
-  puts <<~EOS
-    actor: #{actor}
-    ref: #{ref}
-    sha: #{revision}
-  EOS
-
   # Check if pushed ref is a tag
   prefix = 'refs/tags/'
   odie "GITHUB_REF isn't a tag" unless ref.start_with?(prefix)
@@ -41,9 +34,6 @@ module Homebrew
 
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
-  ENV['HOMEBREW_NO_AUTO_UPDATE'] = '1'
-  ENV['HOMEBREW_NO_ANALYTICS'] = '1'
-  ENV['HOMEBREW_NO_EMOJI'] = '1'
 
   # Set git committer details
   ENV['GIT_COMMITTER_NAME'] = actor
