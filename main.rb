@@ -7,11 +7,15 @@ module Homebrew
 
   def brew(*args)
     puts "[command]brew #{args.join(' ')}"
+    return if ENV['DEBUG']
+
     safe_system('brew', *args)
   end
 
   def git(*args)
     puts "[command]git #{args.join(' ')}"
+    return if ENV['DEBUG']
+
     safe_system('git', *args)
   end
 
@@ -24,9 +28,9 @@ module Homebrew
   force = ENV['INPUT_FORCE']
 
   # Die if required inputs are not provided
-  odie 'TOKEN is required' unless token
-  odie 'FORMULA is required' unless formula
-  odie 'TAG is required' unless tag
+  odie 'TOKEN is required' if token.blank?
+  odie 'FORMULA is required' if formula.blank?
+  odie 'TAG is required' if tag.blank?
 
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
@@ -35,7 +39,7 @@ module Homebrew
   brew 'update-reset'
 
   # Tap if desired
-  if tap
+  unless tap.blank?
     formula = "#{tap}/#{formula}"
     brew 'tap', tap
   end
@@ -60,6 +64,6 @@ module Homebrew
        *("--url=#{url}" unless is_git),
        *("--tag=#{tag}" if is_git),
        *("--revision=#{revision}" if is_git),
-       *('--force' if force),
+       *('--force' unless force.blank?),
        formula
 end
