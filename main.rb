@@ -38,7 +38,7 @@ module Homebrew
   brew 'update-reset'
 
   # Tap if desired
-  tap = formula.match(%r{^(.+/.+)/.+$})
+  tap = formula[%r{^(.+/.+)/.+$}, 1]
   brew 'tap', tap if tap
 
   # Get info about formula
