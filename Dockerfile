@@ -1,5 +1,5 @@
 FROM homebrew/brew
 
-COPY *.sh /
+COPY main.rb /
 
-ENTRYPOINT ["/main.sh"]
+ENTRYPOINT ["brew ruby /main.rb"]
