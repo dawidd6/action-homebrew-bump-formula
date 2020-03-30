@@ -21,23 +21,15 @@ module Homebrew
   formula = ENV['INPUT_FORMULA']
   tap = ENV['INPUT_TAP']
   force = ENV['INPUT_FORCE']
-
-  # Get GITHUB environment variables
-  actor = ENV['GITHUB_ACTOR']
-  ref = ENV['GITHUB_REF']
-  revision = ENV['GITHUB_SHA']
-
-  # Check if pushed ref is a tag
-  prefix = 'refs/tags/'
-  odie "GITHUB_REF isn't a tag" unless ref.start_with?(prefix)
-  tag = ref.delete_prefix(prefix)
+  tag = ENV['INPUT_TAG']
+  revision = ENV['INPUT_REVISION']
 
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
 
   # Set git committer details
-  ENV['GIT_COMMITTER_NAME'] = actor
-  ENV['GIT_COMMITTER_EMAIL'] = "#{actor}@users.noreply.github.com"
+  ENV['GIT_COMMITTER_NAME'] = ENV['GITHUB_ACTOR']
+  ENV['GIT_COMMITTER_EMAIL'] = "#{ENV['GITHUB_ACTOR']}@users.noreply.github.com"
 
   # Update Homebrew
   start_group('Update Homebrew')
@@ -55,15 +47,12 @@ module Homebrew
   # Get info about formula
   info = JSON.parse(`brew info --json #{formula}`)
   old_version = info.first['versions']['stable']
-  new_version = Version.new(tag)
+  new_version = Version.parse(tag)
   stable = info.first['urls']['stable']
-  stable_url = stable['url']
-  stable_tag = stable['tag']
-  stable_revision = stable['revision']
-  using_git = stable_tag && stable_revision
-
-  # Change old version in `url` to the new one if not using git
-  url = stable_url.gsub(old_version, new_version) unless using_git
+  using_git = stable['tag'] && stable['revision']
+  url = stable['url']
+  url.gsub!(old_version, new_version)
+  tag.delete_prefix!('refs/tags/')
 
   # Finally bump the formula
   start_group('Bump the formula')
