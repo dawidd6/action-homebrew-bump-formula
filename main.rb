@@ -25,10 +25,8 @@ module Homebrew
 
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
-
-  # Set git committer details
-  ENV['GIT_COMMITTER_NAME'] = ENV['GITHUB_ACTOR']
-  ENV['GIT_COMMITTER_EMAIL'] = "#{ENV['GITHUB_ACTOR']}@users.noreply.github.com"
+  ENV['HOMEBREW_GIT_NAME'] = ENV['GITHUB_ACTOR']
+  ENV['HOMEBREW_GIT_EMAIL'] = "#{ENV['GITHUB_ACTOR']}@users.noreply.github.com"
 
   # Update Homebrew
   brew 'update-reset'
