@@ -9,22 +9,10 @@ inputs:
     description: Github token (not the default one)
     required: true
   formula:
-    description: Formula name (for example "unzip" or "user/tap/formula")
+    description: Formula name
     required: true
-  url:
-    description: URL to download source archive
-    required: false
-  mirror:
-    description: URL to download source archive (mirror)
-    required: false
-  sha256:
-    description: Source archive SHA256 checksum
-    required: false
-  tag:
-    description: Git tag
-    required: false
-  revision:
-    description: Git revision
+  tap:
+    description: Formula tap
     required: false
   force:
     description: Check open PRs or not
