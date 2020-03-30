@@ -14,6 +14,14 @@ inputs:
   tap:
     description: Formula tap
     required: false
+  tag:
+    description: Git tag
+    required: false
+    default: ${{github.ref}}
+  revision:
+    description: Git revision
+    required: false
+    default: ${{github.sha}}
   force:
     description: Check open PRs or not
     required: false
