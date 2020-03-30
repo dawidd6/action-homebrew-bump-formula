@@ -8,8 +8,8 @@ jobs:
     strategy:
       matrix:
         formula:
-          - test-formula-url
-          - test-formula-git-revision
+          - dawidd6/test/test-formula-url
+          - dawidd6/test/test-formula-git-revision
         include:
           - formula: dawidd6/test/test-formula-url
             tag: v0.1.12
