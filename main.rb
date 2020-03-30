@@ -10,6 +10,11 @@ module Homebrew
     safe_system('brew', *args)
   end
 
+  def git(*args)
+    puts "[command]git #{args.join(' ')}"
+    safe_system('git', *args)
+  end
+
   # Get inputs
   token = ENV['INPUT_TOKEN']
   formula = ENV['INPUT_FORMULA']
@@ -19,14 +24,12 @@ module Homebrew
   force = ENV['INPUT_FORCE']
 
   # Die if required inputs are not provided
-  odie "TOKEN is required" unless token
-  odie "FORMULA is required" unless formula
-  odie "TAG is required" unless tag
+  odie 'TOKEN is required' unless token
+  odie 'FORMULA is required' unless formula
+  odie 'TAG is required' unless tag
 
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
-  ENV['HOMEBREW_GIT_NAME'] = ENV['GITHUB_ACTOR']
-  ENV['HOMEBREW_GIT_EMAIL'] = "#{ENV['GITHUB_ACTOR']}@users.noreply.github.com"
 
   # Update Homebrew
   brew 'update-reset'
@@ -44,6 +47,10 @@ module Homebrew
   # Prepare tag and url
   tag = tag.delete_prefix 'refs/tags/'
   url = stable.url.gsub stable.version.to_s, Version.parse(tag).to_s
+
+  # Tell git who you are
+  git 'config', '--global', 'user.name', ENV['GITHUB_ACTOR']
+  git 'config', '--global', 'user.email', "#{ENV['GITHUB_ACTOR']}@users.noreply.github.com"
 
   # Finally bump the formula
   brew 'bump-formula-pr',
