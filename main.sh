@@ -49,8 +49,8 @@ if test -n "$revision" && test -n "$mirror"; then
 fi
 
 if test -z "$url" && test -z "$tag" && test -z "$revision"; then
-    echo "Need to specify 'url' with optional 'sha256', or 'tag' and 'revision'"
-    exit 1
+    echo "Inferring url from github context"
+    url="https://github.com/${GITHUB_REPOSITORY}/archive/${GITHUB_REF#refs/tags/}.tar.gz"
 fi
 
 if test -z "$tag" && test -n "$revision"; then
