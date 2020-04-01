@@ -1,13 +1,21 @@
 name: Test Action
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        formula:
+          - dawidd6/test/test-formula-url
+          - dawidd6/test/test-formula-git-revision
+        include:
+          - formula: dawidd6/test/test-formula-url
+            tag: v0.1.12
+          - formula: dawidd6/test/test-formula-git-revision
+            tag: v0.3.3
+            revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -15,12 +23,6 @@ jobs:
         uses: ./
         with:
           token: ${{secrets.TOKEN}}
-          formula: dawidd6/homebrew-test/test-formula-url
-          url: https://github.com/dawidd6/actions-updater/archive/v0.1.12.tar.gz
-      - name: Test
-        uses: ./
-        with:
-          token: ${{secrets.TOKEN}}
-          formula: dawidd6/homebrew-test/test-formula-git-revision
-          tag: v0.3.3
-          revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
+          formula: ${{matrix.formula}}
+          tag: ${{matrix.tag}}
+          revision: ${{matrix.revision}}

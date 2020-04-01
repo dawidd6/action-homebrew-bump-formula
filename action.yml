@@ -9,25 +9,33 @@ inputs:
     description: Github token (not the default one)
     required: true
   formula:
-    description: Formula name (for example "unzip" or "user/tap/formula")
+    description: |
+      Formula name
+
+      Optionally in format USER/REPO/FORMULA
+
+      Example: lazygit
+      Example: dawidd6/tap/actions-updater
     required: true
-  url:
-    description: URL to download source archive
-    required: false
-  mirror:
-    description: URL to download source archive (mirror)
-    required: false
-  sha256:
-    description: Source archive SHA256 checksum
-    required: false
   tag:
-    description: Git tag
+    description: |
+      Git tag
+
+      Example: v1.0.0
+      Example: refs/tags/v1.0.0
     required: false
+    default: ${{github.ref}}
   revision:
-    description: Git revision
+    description: |
+      Git revision
+
+      Only required for formulae that use git to download the source
+
+      Example: 130d3a3af72f66780ae4e24cd143ae7a4d757f9d
     required: false
+    default: ${{github.sha}}
   force:
-    description: Check open PRs or not
+    description: Check open PRs or not (will fail if detected)
     required: false
 runs:
   using: docker
