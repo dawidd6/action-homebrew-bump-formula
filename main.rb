@@ -1,19 +1,19 @@
 # frozen_string_literal: true
 
+class Object
+  def false?
+    self.nil?
+  end
+end
+
+class String
+  def false?
+    self.empty? || self.strip == "false"
+  end
+end
+
 module Homebrew
   module_function
-
-  class Object
-    def false?
-      self.nil?
-    end
-  end
-
-  class String
-    def false?
-      self.empty? || self.strip == "false"
-    end
-  end
 
   def brew(*args)
     puts "[command]brew #{args.join(' ')}"
