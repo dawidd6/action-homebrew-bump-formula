@@ -3,6 +3,16 @@
 module Homebrew
   module_function
 
+  class Object
+    def false?
+      if self.is_a? String
+        self.empty? || self.strip == "false"
+      else
+        self.nil?
+      end
+    end
+  end
+
   def brew(*args)
     puts "[command]brew #{args.join(' ')}"
     return if ENV['DEBUG']
@@ -73,6 +83,6 @@ module Homebrew
        *("--url=#{url}" unless is_git),
        *("--tag=#{tag}" if is_git),
        *("--revision=#{revision}" if is_git),
-       *('--force' unless force.blank?),
+       *('--force' unless force.false?),
        formula
 end
