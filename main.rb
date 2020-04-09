@@ -5,11 +5,13 @@ module Homebrew
 
   class Object
     def false?
-      if self.is_a? String
-        self.empty? || self.strip == "false"
-      else
-        self.nil?
-      end
+      self.nil?
+    end
+  end
+
+  class String
+    def false?
+      self.empty? || self.strip == "false"
     end
   end
 
