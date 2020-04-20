@@ -75,6 +75,6 @@ jobs:
         uses: ./
         with:
           token: ${{secrets.TOKEN}}
-          tap: dawidd6/tap
+          tap: dawidd6/test
           force: true
           livecheck: true
