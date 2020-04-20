@@ -6,3 +6,6 @@ process.env.HOMEBREW_NO_ANALYTICS = "1"
 process.env.HOMEBREW_COLOR = "1"
 
 exec.exec("brew", ["ruby", "main.rb"])
+    .catch(function () {
+        process.exit(1)
+    })
