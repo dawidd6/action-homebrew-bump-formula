@@ -67,6 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - test
+      - test-livecheck-formula
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -75,5 +76,4 @@ jobs:
         with:
           token: ${{secrets.TOKEN}}
           tap: dawidd6/tap
-          force: true
           livecheck: true
