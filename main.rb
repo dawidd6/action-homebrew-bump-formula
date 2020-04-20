@@ -41,8 +41,18 @@ module Homebrew
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
 
-  # Get user details
+  # Get actor
   actor = ENV['GITHUB_ACTOR']
+
+  # Check inputs
+  if livecheck.false?
+    odie "Need 'formula' input specified" if formula.blank?
+    odie "Need 'tag' input specified" if tag.blank?
+  elsif tap.blank? && formula.blank?
+    odie "Need 'tap' or 'formula' input specified"
+  end
+
+  # Get user details
   user = GitHub.open_api "#{GitHub::API_URL}/users/#{actor}"
   user_name = user['name'] || user['login']
   user_email = user['email'] || (
@@ -63,13 +73,14 @@ module Homebrew
   brew 'update-reset'
 
   # Tap the tap if desired and change the formula name to full name
-  if tap
-    brew 'tap', tap
-    formula = tap + '/' + formula
-  end
+  brew 'tap', tap unless tap.blank?
+  formula = tap + '/' + formula if !tap.blank? && !formula.blank?
+
+  # Define additional PR message
+  message = '[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
 
   # Do livecheck stuff
-  if livecheck
+  unless livecheck.false?
     # Tap livecheck command
     brew 'tap', 'homebrew/livecheck'
 
@@ -103,7 +114,7 @@ module Homebrew
       brew 'bump-formula-pr',
            '--no-audit',
            '--no-browse',
-           '--message=[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)',
+           "--message=#{message}",
            *("--url=#{url}" unless is_git),
            *("--tag=#{tag}" if is_git),
            *("--revision=#{revision}" if is_git),
@@ -126,7 +137,7 @@ module Homebrew
   brew 'bump-formula-pr',
        '--no-audit',
        '--no-browse',
-       '--message=[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)',
+       "--message=#{message}",
        *("--url=#{url}" unless is_git),
        *("--tag=#{tag}" if is_git),
        *("--revision=#{revision}" if is_git),
