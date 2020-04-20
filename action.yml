@@ -41,6 +41,13 @@ inputs:
   force:
     description: Check open PRs or not (will fail if detected)
     required: false
+  livecheck:
+    description: |
+      Use `brew livecheck` to determine outdated formulae
+
+      If `tap` input is specified - check all formulae in this tap
+      If `formula` input is specified - check one formula
+    required: false
 runs:
   using: node12
   main: main.js
