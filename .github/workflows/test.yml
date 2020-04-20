@@ -36,38 +36,10 @@ jobs:
           tag: ${{matrix.tag}}
           revision: ${{matrix.revision}}
           force: ${{matrix.force}}
-  test-livecheck-formula:
-    strategy:
-      matrix:
-        formula:
-          - test-formula-url
-          - test-formula-git-revision
-        include:
-          - formula: test-formula-url
-            os: macos-latest
-            tap: dawidd6/test
-          - formula: test-formula-git-revision
-            os: ubuntu-latest
-            tap: dawidd6/test
-    runs-on: ${{matrix.os}}
-    needs:
-      - test
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Test
-        uses: ./
-        with:
-          token: ${{secrets.TOKEN}}
-          formula: ${{matrix.formula}}
-          tap: ${{matrix.tap}}
-          force: true
-          livecheck: true
-  test-livecheck-tap:
+  test-livecheck:
     runs-on: ubuntu-latest
     needs:
       - test
-      - test-livecheck-formula
     steps:
       - name: Checkout
         uses: actions/checkout@v2
