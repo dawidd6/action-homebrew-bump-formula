@@ -2,6 +2,8 @@
 
 An action that wraps `brew bump-formula-pr` to ease the process of updating the formula on new project releases.
 
+Runs on `ubuntu` and `macos`.
+
 ## Usage
 
 One should use the [Personal Access Token](https://github.com/settings/tokens/new?scopes=public_repo) for `token` input to this Action, not the default `GITHUB_TOKEN`, because `brew bump-formula-pr` creates a fork of the formula's tap repository (if needed) and then creates a pull request.
