@@ -36,6 +36,7 @@ module Homebrew
   tag = ENV['INPUT_TAG']
   revision = ENV['INPUT_REVISION']
   force = ENV['INPUT_FORCE']
+  livecheck = ENV['INPUT_LIVECHECK']
 
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
@@ -61,10 +62,56 @@ module Homebrew
   # Update Homebrew
   brew 'update-reset'
 
-  # Tap if desired and change the formula name to full name
+  # Tap the tap if desired and change the formula name to full name
   if tap
     brew 'tap', tap
     formula = tap + '/' + formula
+  end
+
+  # Do livecheck stuff
+  if livecheck
+    # Tap livecheck command
+    brew 'tap', 'homebrew/livecheck'
+
+    # Get livecheck info
+    json = Utils.popen_read 'brew', 'livecheck',
+                            '--quiet',
+                            '--newer-only',
+                            '--full-name',
+                            '--json',
+                            *("--tap=#{tap}" if !tap.blank? && formula.blank?),
+                            *(formula unless formula.blank?)
+    json = JSON.parse json
+
+    # Loop over livecheck info
+    json.each do |info|
+      # Get info about formula
+      formula = info['formula']
+      stable = Formula[formula].stable
+      is_git = stable.downloader.is_a? GitDownloadStrategy
+
+      # Prepare tag and revision or url
+      if is_git
+        tag = stable.specs[:tag].gsub stable.version, info['version']['latest']
+        revision = Utils.popen_read 'git', 'ls-remote', '-t', stable.url, tag
+        revision = revision.split("\t").first
+      else
+        url = stable.url.gsub stable.version, info['version']['latest']
+      end
+
+      # Finally bump the formula
+      brew 'bump-formula-pr',
+           '--no-audit',
+           '--no-browse',
+           '--message=[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)',
+           *("--url=#{url}" unless is_git),
+           *("--tag=#{tag}" if is_git),
+           *("--revision=#{revision}" if is_git),
+           *('--force' unless force.false?),
+           formula
+    end
+
+    exit
   end
 
   # Get info about formula
