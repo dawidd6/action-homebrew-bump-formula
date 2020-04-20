@@ -76,4 +76,5 @@ jobs:
         with:
           token: ${{secrets.TOKEN}}
           tap: dawidd6/tap
+          force: true
           livecheck: true
