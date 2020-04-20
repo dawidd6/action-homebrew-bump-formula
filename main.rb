@@ -2,13 +2,13 @@
 
 class Object
   def false?
-    self.nil?
+    nil?
   end
 end
 
 class String
   def false?
-    self.empty? || self.strip == "false"
+    empty? || strip == 'false'
   end
 end
 
@@ -31,15 +31,11 @@ module Homebrew
 
   # Get inputs
   token = ENV['INPUT_TOKEN']
+  tap = ENV['INPUT_TAP']
   formula = ENV['INPUT_FORMULA']
   tag = ENV['INPUT_TAG']
   revision = ENV['INPUT_REVISION']
   force = ENV['INPUT_FORCE']
-
-  # Die if required inputs are not provided
-  odie 'TOKEN is required' if token.blank?
-  odie 'FORMULA is required' if formula.blank?
-  odie 'TAG is required' if tag.blank?
 
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
@@ -47,7 +43,7 @@ module Homebrew
   # Get user details
   actor = ENV['GITHUB_ACTOR']
   user = GitHub.open_api "#{GitHub::API_URL}/users/#{actor}"
-  user_name = user['name'] || actor
+  user_name = user['name'] || user['login']
   user_email = user['email'] || (
     # https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/setting-your-commit-email-address
     user_created_at = Date.parse user['created_at']
@@ -65,9 +61,11 @@ module Homebrew
   # Update Homebrew
   brew 'update-reset'
 
-  # Tap if desired
-  tap = formula[%r{^(.+/.+)/.+$}, 1]
-  brew 'tap', tap if tap
+  # Tap if desired and change the formula name to full name
+  if tap
+    brew 'tap', tap
+    formula = tap + '/' + formula
+  end
 
   # Get info about formula
   stable = Formula[formula].stable

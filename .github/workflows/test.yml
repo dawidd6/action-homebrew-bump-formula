@@ -7,19 +7,23 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
     strategy:
       matrix:
         formula:
-          - dawidd6/test/test-formula-url
-          - dawidd6/test/test-formula-git-revision
+          - test-formula-url
+          - test-formula-git-revision
         include:
-          - formula: dawidd6/test/test-formula-url
+          - formula: test-formula-url
+            os: macos-latest
+            tap: dawidd6/test
             tag: v0.1.12
             force: false
-          - formula: dawidd6/test/test-formula-git-revision
+          - formula: test-formula-git-revision
+            os: ubuntu-latest
+            tap: dawidd6/test
             tag: v0.3.3
             revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
+    runs-on: ${{matrix.os}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -27,6 +31,7 @@ jobs:
         uses: ./
         with:
           token: ${{secrets.TOKEN}}
+          tap: ${{matrix.tap}}
           formula: ${{matrix.formula}}
           tag: ${{matrix.tag}}
           revision: ${{matrix.revision}}

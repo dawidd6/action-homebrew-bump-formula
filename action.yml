@@ -8,15 +8,19 @@ inputs:
   token:
     description: Github token (not the default one)
     required: true
+  tap:
+    description: |
+      Formula tap
+
+      Example: dawidd6/tap
+      Example: dawidd6/homebrew-tap
+    required: false
   formula:
     description: |
       Formula name
 
-      Optionally in format USER/REPO/FORMULA
-
       Example: lazygit
-      Example: dawidd6/tap/actions-updater
-    required: true
+    required: false
   tag:
     description: |
       Git tag
@@ -38,5 +42,5 @@ inputs:
     description: Check open PRs or not (will fail if detected)
     required: false
 runs:
-  using: docker
-  image: Dockerfile
+  using: node12
+  main: main.js

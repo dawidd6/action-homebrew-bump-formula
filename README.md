@@ -21,12 +21,12 @@ because then, the script will extract all needed informations by itself, you jus
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@v2
   with:
+    # Github token, required, not the default one
     token: ${{secrets.TOKEN}}
-    # For example:
-    #   dawidd6/tap/actions-updater
-    # or if the formula is in the core tap:
-    #   lazygit
-    formula: USER/REPO/FORMULA
+    # Optional, defaults to homebrew/core
+    tap: dawidd6/tap
+    # Formula name, generally required
+    formula: FORMULA
     # Optional, will be determined automatically
     tag: ${{github.ref}}
     # Optional, will be determined automatically
