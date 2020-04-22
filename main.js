@@ -8,6 +8,7 @@ process.env.HOMEBREW_COLOR = "1"
 
 console.log(__dirname)
 console.log(__filename)
+console.log(path.join(__dirname, "main.rb"))
 
 exec.exec("brew", ["ruby", path.join(__dirname, "main.rb")])
     .catch(function () {
