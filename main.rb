@@ -106,9 +106,10 @@ module Homebrew
 
       # Prepare tag and revision or url
       if is_git
+        dir = "/tmp/#{formula}"
         tag = stable.specs[:tag].gsub stable.version, info['version']['latest']
-        revision = Utils.popen_read 'git', 'ls-remote', '-t', stable.url, tag
-        revision = revision.split("\t").first
+        git 'clone', '--depth', '1', '--branch', tag, stable.url, dir
+        revision = Utils.popen_read 'git', '-C', dir, 'rev-parse', 'HEAD'
       else
         url = stable.url.gsub stable.version, info['version']['latest']
       end
