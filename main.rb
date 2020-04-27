@@ -94,6 +94,9 @@ module Homebrew
                             *(formula unless formula.blank?)
     json = JSON.parse json
 
+    # Define error
+    err = nil
+
     # Loop over livecheck info
     json.each do |info|
       # Get info about formula
@@ -110,19 +113,30 @@ module Homebrew
         url = stable.url.gsub stable.version, info['version']['latest']
       end
 
-      # Finally bump the formula
-      brew 'bump-formula-pr',
-           '--no-audit',
-           '--no-browse',
-           "--message=#{message}",
-           *("--url=#{url}" unless is_git),
-           *("--tag=#{tag}" if is_git),
-           *("--revision=#{revision}" if is_git),
-           *('--force' unless force.false?),
-           formula
+      begin
+        # Finally bump the formula
+        brew 'bump-formula-pr',
+             '--no-audit',
+             '--no-browse',
+             "--message=#{message}",
+             *("--url=#{url}" unless is_git),
+             *("--tag=#{tag}" if is_git),
+             *("--revision=#{revision}" if is_git),
+             *('--force' unless force.false?),
+             formula
+      rescue ErrorDuringExecution => e
+        # Continue execution on error, but save the exeception
+        err = e
+      end
     end
 
-    exit
+    if err
+      # Die if error occured
+      odie err
+    else
+      # Just exit if everything went fine
+      exit
+    end
   end
 
   # Get info about formula
