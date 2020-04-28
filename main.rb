@@ -109,7 +109,7 @@ module Homebrew
         dir = "/tmp/#{formula}"
         tag = stable.specs[:tag].gsub stable.version, info['version']['latest']
         git 'clone', '--depth', '1', '--branch', tag, stable.url, dir
-        revision = Utils.popen_read 'git', '-C', dir, 'rev-parse', 'HEAD'
+        revision = Utils.popen_read('git', '-C', dir, 'rev-parse', 'HEAD').chomp
       else
         url = stable.url.gsub stable.version, info['version']['latest']
       end
