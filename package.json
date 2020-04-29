@@ -2,6 +2,6 @@
   "name": "action-homebrew-bump-formula",
   "main": "main.js",
   "dependencies": {
-    "@actions/exec": "^1.0.3"
+    "@actions/exec": "^1.0.4"
   }
 }
