@@ -19,7 +19,7 @@ jobs:
             tag: v0.1.12
             force: false
           - formula: test-formula-git-revision
-            os: ubuntu-latest
+            os: macos-latest
             tap: dawidd6/test
             tag: v0.3.3
             revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
