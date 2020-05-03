@@ -47,7 +47,7 @@ jobs:
             os: macos-latest
             tap: dawidd6/test
           - formula: test-formula-git-revision
-            os: ubuntu-latest
+            os: macos-latest
             tap: dawidd6/test
     runs-on: ${{matrix.os}}
     needs:
@@ -64,7 +64,7 @@ jobs:
           force: true
           livecheck: true
   test-livecheck-tap:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs:
       - test
       - test-livecheck-formula
