@@ -52,22 +52,32 @@ module Homebrew
     odie "Need 'tap' or 'formula' input specified"
   end
 
-  # Get user details
-  user = GitHub.open_api "#{GitHub::API_URL}/users/#{actor}"
-  user_name = user['name'] || user['login']
-  user_email = user['email'] || (
-    # https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/setting-your-commit-email-address
-    user_created_at = Date.parse user['created_at']
-    plus_after_date = Date.parse '2017-07-18'
-    need_plus_email = (user_created_at - plus_after_date).positive?
-    user_email = "#{actor}@users.noreply.github.com"
-    user_email = "#{user['id']}+#{user_email}" if need_plus_email
-    user_email
-  )
+  # Change directory
+  Dir.chdir Utils.popen_read('brew', '--repo').chomp
 
-  # Tell git who you are
-  git 'config', '--global', 'user.name', user_name
-  git 'config', '--global', 'user.email', user_email
+  # Check if git user details are configured
+  is_git_user = quiet_system('git', 'config', 'user.name')
+  is_git_email = quiet_system('git', 'config', 'user.email')
+
+  # Configure git user details if needed
+  if !is_git_user || !is_git_email
+    # Get user details
+    user = GitHub.open_api "#{GitHub::API_URL}/users/#{actor}"
+    user_name = user['name'] || user['login']
+    user_email = user['email'] || (
+      # https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/setting-your-commit-email-address
+      user_created_at = Date.parse user['created_at']
+      plus_after_date = Date.parse '2017-07-18'
+      need_plus_email = (user_created_at - plus_after_date).positive?
+      user_email = "#{actor}@users.noreply.github.com"
+      user_email = "#{user['id']}+#{user_email}" if need_plus_email
+      user_email
+    )
+
+    # Tell git who you are
+    git 'config', 'user.name', user_name
+    git 'config', 'user.email', user_email
+  end
 
   # Update Homebrew
   brew 'update-reset'
