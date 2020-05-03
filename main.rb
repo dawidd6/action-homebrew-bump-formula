@@ -53,7 +53,7 @@ module Homebrew
   end
 
   # Get user details
-  user = GitHub.open_api "#{GitHub::API_URL}/users/#{actor}"
+  user = GitHub.open_api "#{GitHub::API_URL}/user"
   user_name = user['name'] || user['login']
   user_email = user['email'] || (
     # https://help.github.com/en/github/setting-up-and-managing-your-github-user-account/setting-your-commit-email-address
