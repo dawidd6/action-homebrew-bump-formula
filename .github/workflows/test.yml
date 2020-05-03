@@ -71,10 +71,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup git
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "41898282+github-actions@users.noreply.github.com>"
       - name: Test
         uses: ./
         with:
