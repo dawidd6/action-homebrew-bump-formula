@@ -73,8 +73,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup git
         run: |
-          git config user.name "github-actions"
-          git config user.email "41898282+github-actions@users.noreply.github.com>"
+          git config --global user.name "github-actions"
+          git config --global user.email "41898282+github-actions@users.noreply.github.com>"
       - name: Test
         uses: ./
         with:
