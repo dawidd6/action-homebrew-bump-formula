@@ -64,7 +64,9 @@ jobs:
           force: true
           livecheck: true
   test-livecheck-tap:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
+    container:
+      image: homebrew/brew
     needs:
       - test
       - test-livecheck-formula
