@@ -14,7 +14,7 @@ jobs:
           - test-formula-git-revision
         include:
           - formula: test-formula-url
-            os: macos-latest
+            os: ubuntu-latest
             tap: dawidd6/test
             tag: v0.1.12
             force: false
@@ -44,7 +44,7 @@ jobs:
           - test-formula-git-revision
         include:
           - formula: test-formula-url
-            os: macos-latest
+            os: ubuntu-latest
             tap: dawidd6/test
           - formula: test-formula-git-revision
             os: macos-latest
