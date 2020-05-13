@@ -2,7 +2,7 @@
 
 An action that wraps `brew bump-formula-pr` to ease the process of updating the formula on new project releases.
 
-Runs on ~~`ubuntu`~~ (currently `brew` is not available in Ubuntu images) and `macos`.
+Runs on `ubuntu` and `macos`.
 
 ## Usage
 
