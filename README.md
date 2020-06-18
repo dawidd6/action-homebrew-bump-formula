@@ -32,7 +32,7 @@ The Action will extract all needed informations by itself, you just need to spec
     # Github token, required, not the default one
     token: ${{secrets.TOKEN}}
     # Optional, defaults to homebrew/core
-    tap: REPO/NAME
+    tap: USER/REPO
     # Formula name, generally required
     formula: FORMULA
     # Optional, will be determined automatically
@@ -58,11 +58,11 @@ If there are no outdated formulae, the Action will just exit.
     # Github token, required, not the default one
     token: ${{secrets.TOKEN}}
     # Bump all outdated formulae in this tap
-    tap: dawidd6/tap
+    tap: USER/REPO
     # Bump only this formula if outdated
     formula: FORMULA
     # Optional, if don't want to check for already open PRs
     force: false # true
-    # Need to set this input if wants to use `brew livecheck`
+    # Need to set this input if want to use `brew livecheck`
     livecheck: true
 ```
