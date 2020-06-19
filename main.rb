@@ -104,7 +104,7 @@ module Homebrew
     brew 'tap', 'homebrew/livecheck'
 
     # Support multiple formulae in input
-    formula = formula.split(/[ ,]/).reject(&:blank?) unless formula.blank?
+    formula = formula.split(/[ ,\n]/).reject(&:blank?) unless formula.blank?
 
     # Change formulae names to full names
     formula = formula.map { |f| tap + '/' + f } if !tap.blank? && !formula.blank?
