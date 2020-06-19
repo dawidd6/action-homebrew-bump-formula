@@ -70,15 +70,17 @@ module Homebrew
   # Update Homebrew
   brew 'update-reset'
 
-  # Tap the tap if desired and change the formula name to full name
+  # Tap the tap if desired
   brew 'tap', tap unless tap.blank?
-  formula = tap + '/' + formula if !tap.blank? && !formula.blank?
-
+  
   # Define additional PR message
   message = '[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
 
   # Do the livecheck stuff or not
   if livecheck.false?
+    # Change formula name to full name
+    formula = tap + '/' + formula if !tap.blank? && !formula.blank?
+
     # Get info about formula
     stable = Formula[formula].stable
     is_git = stable.downloader.is_a? GitDownloadStrategy
@@ -100,6 +102,12 @@ module Homebrew
   else
     # Tap livecheck command
     brew 'tap', 'homebrew/livecheck'
+
+    # Support multiple formulae in input
+    formula = formula.split(/[ ,]/).reject(&:blank?) unless formula.blank?
+
+    # Change formulae names to full names
+    formula = formula.map { |f| tap + '/' + f } if !tap.blank? && !formula.blank?
 
     # Get livecheck info
     json = Utils.popen_read 'brew', 'livecheck',
