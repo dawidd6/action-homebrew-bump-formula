@@ -19,14 +19,28 @@ module Homebrew
     puts "[command]brew #{args.join(' ')}"
     return if ENV['DEBUG']
 
-    safe_system('brew', *args)
+    safe_system 'brew', *args
   end
 
   def git(*args)
     puts "[command]git #{args.join(' ')}"
     return if ENV['DEBUG']
 
-    safe_system('git', *args)
+    safe_system 'git', *args
+  end
+
+  def read_brew(*args)
+    puts "[command]brew #{args.join(' ')}"
+    return if ENV['DEBUG']
+
+    Utils.safe_popen_read('brew', *args).chomp
+  end
+
+  def read_git(*args)
+    puts "[command]git #{args.join(' ')}"
+    return if ENV['DEBUG']
+
+    Utils.safe_popen_read('git', *args).chomp
   end
 
   # Get inputs
@@ -110,13 +124,13 @@ module Homebrew
     formula = formula.map { |f| tap + '/' + f } if !tap.blank? && !formula.blank?
 
     # Get livecheck info
-    json = Utils.popen_read 'brew', 'livecheck',
-                            '--quiet',
-                            '--newer-only',
-                            '--full-name',
-                            '--json',
-                            *("--tap=#{tap}" if !tap.blank? && formula.blank?),
-                            *(formula unless formula.blank?)
+    json = read_brew 'livecheck',
+                     '--quiet',
+                     '--newer-only',
+                     '--full-name',
+                     '--json',
+                     *("--tap=#{tap}" if !tap.blank? && formula.blank?),
+                     *(formula unless formula.blank?)
     json = JSON.parse json
 
     # Define error
@@ -134,7 +148,7 @@ module Homebrew
         dir = "/tmp/#{formula}"
         tag = stable.specs[:tag].gsub stable.version, info['version']['latest']
         git 'clone', '--depth', '1', '--branch', tag, stable.url, dir
-        revision = Utils.popen_read('git', '-C', dir, 'rev-parse', 'HEAD').chomp
+        revision = read_git '-C', dir, 'rev-parse', 'HEAD'
       else
         url = stable.url.gsub stable.version, info['version']['latest']
       end
