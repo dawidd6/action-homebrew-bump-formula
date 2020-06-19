@@ -47,8 +47,6 @@ module Homebrew
     odie "Need 'tag' input specified" if tag.blank?
   elsif tap.blank? && formula.blank?
     odie "Need 'tap' or 'formula' input specified"
-  elsif !tap.blank? && !formula.blank?
-    odie "'tap' and 'formula' inputs cannot be specified together"
   end
 
   # Get user details
@@ -109,7 +107,7 @@ module Homebrew
                             '--newer-only',
                             '--full-name',
                             '--json',
-                            *("--tap=#{tap}" unless tap.blank?),
+                            *("--tap=#{tap}" if !tap.blank? && formula.blank?),
                             *(formula unless formula.blank?)
     json = JSON.parse json
 
