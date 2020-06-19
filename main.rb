@@ -47,6 +47,8 @@ module Homebrew
     odie "Need 'tag' input specified" if tag.blank?
   elsif tap.blank? && formula.blank?
     odie "Need 'tap' or 'formula' input specified"
+  elsif !tap.blank? && !formula.blank?
+    odie "'tap' and 'formula' inputs cannot be specified together"
   end
 
   # Get user details
@@ -77,8 +79,27 @@ module Homebrew
   # Define additional PR message
   message = '[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
 
-  # Do livecheck stuff
-  unless livecheck.false?
+  # Do the livecheck stuff or not
+  if livecheck.false?
+    # Get info about formula
+    stable = Formula[formula].stable
+    is_git = stable.downloader.is_a? GitDownloadStrategy
+
+    # Prepare tag and url
+    tag = tag.delete_prefix 'refs/tags/'
+    url = stable.url.gsub stable.version, Version.parse(tag)
+
+    # Finally bump the formula
+    brew 'bump-formula-pr',
+         '--no-audit',
+         '--no-browse',
+         "--message=#{message}",
+         *("--url=#{url}" unless is_git),
+         *("--tag=#{tag}" if is_git),
+         *("--revision=#{revision}" if is_git),
+         *('--force' unless force.false?),
+         formula
+  else
     # Tap livecheck command
     brew 'tap', 'homebrew/livecheck'
 
@@ -88,7 +109,7 @@ module Homebrew
                             '--newer-only',
                             '--full-name',
                             '--json',
-                            *("--tap=#{tap}" if !tap.blank? && formula.blank?),
+                            *("--tap=#{tap}" unless tap.blank?),
                             *(formula unless formula.blank?)
     json = JSON.parse json
 
@@ -129,31 +150,7 @@ module Homebrew
       end
     end
 
-    if err
-      # Die if error occured
-      odie err
-    else
-      # Just exit if everything went fine
-      exit
-    end
+    # Die if error occured
+    odie err if err
   end
-
-  # Get info about formula
-  stable = Formula[formula].stable
-  is_git = stable.downloader.is_a? GitDownloadStrategy
-
-  # Prepare tag and url
-  tag = tag.delete_prefix 'refs/tags/'
-  url = stable.url.gsub stable.version, Version.parse(tag)
-
-  # Finally bump the formula
-  brew 'bump-formula-pr',
-       '--no-audit',
-       '--no-browse',
-       "--message=#{message}",
-       *("--url=#{url}" unless is_git),
-       *("--tag=#{tag}" if is_git),
-       *("--revision=#{revision}" if is_git),
-       *('--force' unless force.false?),
-       formula
 end
