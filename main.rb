@@ -138,6 +138,9 @@ module Homebrew
 
     # Loop over livecheck info
     json.each do |info|
+      # Skip if there is no version field
+      next unless info['version']
+
       # Get info about formula
       formula = info['formula']
       stable = Formula[formula].stable
