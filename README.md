@@ -1,4 +1,4 @@
-# Homebrew bump formula Github Action
+# Homebrew bump formula GitHub Action
 
 An action that wraps `brew bump-formula-pr` to ease the process of updating the formula on new project releases.
 
@@ -29,11 +29,11 @@ The Action will extract all needed informations by itself, you just need to spec
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@v3
   with:
-    # Github token, required, not the default one
+    # GitHub token, required, not the default one
     token: ${{secrets.TOKEN}}
     # Optional, defaults to homebrew/core
     tap: USER/REPO
-    # Formula name, generally required
+    # Formula name, required
     formula: FORMULA
     # Optional, will be determined automatically
     tag: ${{github.ref}}
@@ -45,9 +45,9 @@ The Action will extract all needed informations by itself, you just need to spec
 
 ### Livecheck
 
-If `livecheck` input is set to `true`, the Action will run `brew livecheck` to check if formula is outdated or if tap contains outdated formulae and then will run `brew bump-formula-pr` on those formulae with proper arguments to bump them.
+If `livecheck` input is set to `true`, the Action will run `brew livecheck` to check if any provided formulae are outdated or if tap contains any outdated formulae and then will run `brew bump-formula-pr` on each of those formulae with proper arguments to bump them.
 
-Might be a good idea to run this on schedule.
+Might be a good idea to run this on schedule, so one gets automated PRs updating outdated formulae.
 
 If there are no outdated formulae, the Action will just exit.
 
@@ -55,14 +55,25 @@ If there are no outdated formulae, the Action will just exit.
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@v3
   with:
-    # Github token, required, not the default one
+    # GitHub token, required, not the default one
     token: ${{secrets.TOKEN}}
     # Bump all outdated formulae in this tap
     tap: USER/REPO
-    # Bump only this formula if outdated
-    formula: FORMULA
+    # Bump only these formulae if outdated
+    formula: FORMULA-1, FORMULA-2, FORMULA-3, ...
     # Optional, if don't want to check for already open PRs
     force: false # true
     # Need to set this input if want to use `brew livecheck`
     livecheck: true
 ```
+
+## Examples
+
+- https://github.com/dawidd6/action-homebrew-bump-formula/blob/master/.github/workflows/test.yml
+- https://github.com/dawidd6/ba-bump/blob/master/.github/workflows/bump.yml
+- https://github.com/ablinov/declutter/blob/master/.github/workflows/bump_homebrew_formula.yml
+- https://github.com/jesseduffield/lazygit/blob/master/.github/workflows/cd.yml
+- https://github.com/stephan-hesselmann-by/homebrew-BlueYonder/blob/master/.github/workflows/update-tap.yml
+- https://github.com/crunchtime-ali/brew-formula-updater/blob/master/.github/workflows/main.yml
+- https://github.com/asciidoc/asciidoc-py3/blob/master/.github/workflows/release.yml
+
