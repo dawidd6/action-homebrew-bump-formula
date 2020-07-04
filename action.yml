@@ -6,24 +6,33 @@ branding:
   color: yellow
 inputs:
   token:
-    description: Github token (not the default one)
+    description: GitHub token (not the default one)
     required: true
   tap:
     description: |
-      Formula tap
+      Formula tap.
+
+      In livecheck mode, if formula input is empty,
+      the Action will check the whole tap.
 
       Example: dawidd6/tap
       Example: dawidd6/homebrew-tap
     required: false
   formula:
     description: |
-      Formula name
+      Formula name.
+
+      In livecheck mode, this could take more than one formula,
+      separated by commas or spaces or newlines.
 
       Example: lazygit
+      Example (livecheck): lazygit, lazydocker, lazynpm
     required: false
   tag:
     description: |
-      Git tag
+      Git tag.
+
+      It is determined automatically.
 
       Example: v1.0.0
       Example: refs/tags/v1.0.0
@@ -31,9 +40,11 @@ inputs:
     default: ${{github.ref}}
   revision:
     description: |
-      Git revision
+      Git revision.
 
-      Only required for formulae that use git to download the source
+      Only required for formulae that use git to download the source.
+
+      It is determined automatically.
 
       Example: 130d3a3af72f66780ae4e24cd143ae7a4d757f9d
     required: false
@@ -43,10 +54,11 @@ inputs:
     required: false
   livecheck:
     description: |
-      Use `brew livecheck` to determine outdated formulae
+      Use `brew livecheck` to determine outdated formulae.
 
-      If `tap` input is specified - check all formulae in this tap
-      If `formula` input is specified - check one formula
+      If tap input is specified - check all formulae in this tap.
+      If formula input is specified - check one or more formulae.
+      If formula and tap inputs are specified - check one or more formulae in that tap.
     required: false
 runs:
   using: node12
