@@ -7,6 +7,7 @@ async function main() {
         process.env.HOMEBREW_NO_ENV_FILTERING = "1"
         process.env.HOMEBREW_NO_AUTO_UPDATE = "1"
         process.env.HOMEBREW_NO_ANALYTICS = "1"
+        process.env.HOMEBREW_DEVELOPER = "1"
         process.env.HOMEBREW_COLOR = "1"
 
         await exec.exec("brew", ["ruby", path.join(__dirname, "main.rb")])
