@@ -82,9 +82,6 @@ module Homebrew
   git 'config', '--global', 'user.name', user_name
   git 'config', '--global', 'user.email', user_email
 
-  # Update Homebrew
-  brew 'update-reset'
-
   # Tap the tap if desired
   brew 'tap', tap unless tap.blank?
 
