@@ -14,17 +14,15 @@ jobs:
           - test-formula-git-revision
         include:
           - formula: test-formula-url
-            os: ubuntu-latest
             tap: dawidd6/test
             tag: v0.1.12
             force: true
           - formula: test-formula-git-revision
-            os: macos-latest
             tap: dawidd6/test
             tag: v0.3.3
             revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
             force: true
-    runs-on: ${{matrix.os}}
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
