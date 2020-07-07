@@ -124,8 +124,6 @@ module Homebrew
     # Change formulae names to full names
     formula = formula.map { |f| tap + '/' + f } if !tap.blank? && !formula.blank?
 
-    puts read_brew 'config'
-
     # Get livecheck info
     json = read_brew 'livecheck',
                      '--quiet',
@@ -135,8 +133,6 @@ module Homebrew
                      *("--tap=#{tap}" if !tap.blank? && formula.blank?),
                      *(formula unless formula.blank?)
     json = JSON.parse json
-
-    puts read_brew 'config'
 
     # Define error
     err = nil
