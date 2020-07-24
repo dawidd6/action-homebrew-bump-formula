@@ -8,6 +8,10 @@ inputs:
   token:
     description: GitHub token (not the default one)
     required: true
+  message:
+    description: |
+      Additional message to append to created PR.
+    required: false
   tap:
     description: |
       Formula tap.
