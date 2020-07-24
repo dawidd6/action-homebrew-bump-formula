@@ -45,6 +45,7 @@ module Homebrew
 
   # Get inputs
   token = ENV['INPUT_TOKEN']
+  message = ENV['INPUT_MESSAGE']
   tap = ENV['INPUT_TAP']
   formula = ENV['INPUT_FORMULA']
   tag = ENV['INPUT_TAG']
@@ -85,8 +86,13 @@ module Homebrew
   # Tap the tap if desired
   brew 'tap', tap unless tap.blank?
 
-  # Define additional PR message
-  message = '[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
+  # Append additional PR message
+  if message.blank?
+    message = ''
+  else
+    message += "\n\n"
+  end
+  message += '[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
 
   # Do the livecheck stuff or not
   if livecheck.false?
