@@ -76,4 +76,4 @@ If there are no outdated formulae, the Action will just exit.
 - https://github.com/stephan-hesselmann-by/homebrew-BlueYonder/blob/master/.github/workflows/update-tap.yml
 - https://github.com/crunchtime-ali/brew-formula-updater/blob/master/.github/workflows/main.yml
 - https://github.com/asciidoc/asciidoc-py3/blob/master/.github/workflows/release.yml
-
+- https://github.com/bow-swift/nef/blob/master/.github/workflows/bump-formula.yml
