@@ -105,13 +105,15 @@ module Homebrew
 
     # Prepare tag and url
     tag = tag.delete_prefix 'refs/tags/'
-    url = stable.url.gsub stable.version, Version.parse(tag)
+    version = Version.parse tag
+    url = stable.url.gsub stable.version, version
 
     # Finally bump the formula
     brew 'bump-formula-pr',
          '--no-audit',
          '--no-browse',
          "--message=#{message}",
+         "--version=#{version}",
          *("--url=#{url}" unless is_git),
          *("--tag=#{tag}" if is_git),
          *("--revision=#{revision}" if is_git),
