@@ -153,18 +153,7 @@ module Homebrew
 
       # Get info about formula
       formula = info['formula']
-      stable = Formula[formula].stable
-      is_git = stable.downloader.is_a? GitDownloadStrategy
-
-      # Prepare tag and revision or url
-      if is_git
-        dir = "/tmp/#{formula}"
-        tag = stable.specs[:tag].gsub stable.version, info['version']['latest']
-        git 'clone', '--depth', '1', '--branch', tag, stable.url, dir
-        revision = read_git '-C', dir, 'rev-parse', 'HEAD'
-      else
-        url = stable.url.gsub stable.version, info['version']['latest']
-      end
+      version = info['version']['latest']
 
       begin
         # Finally bump the formula
@@ -172,9 +161,7 @@ module Homebrew
              '--no-audit',
              '--no-browse',
              "--message=#{message}",
-             *("--url=#{url}" unless is_git),
-             *("--tag=#{tag}" if is_git),
-             *("--revision=#{revision}" if is_git),
+             "--version=#{version}",
              *('--force' unless force.false?),
              formula
       rescue ErrorDuringExecution => e
