@@ -123,11 +123,11 @@ module Homebrew
     # Tap livecheck command
     brew 'tap', 'homebrew/livecheck'
 
-    # Support multiple formulae in input
-    formula = formula.split(/[ ,\n]/).reject(&:blank?) unless formula.blank?
-
-    # Change formulae names to full names
-    formula = formula.map { |f| tap + '/' + f } if !tap.blank? && !formula.blank?
+    # Support multiple formulae in input and change to full names if tap
+    unless formula.blank?
+      formula = formula.split(/[ ,\n]/).reject(&:blank?)
+      formula = formula.map { |f| tap + '/' + f } unless tap.blank?
+    end
 
     # Get livecheck info
     json = read_brew 'livecheck',
