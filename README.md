@@ -10,7 +10,7 @@ One should use the [Personal Access Token](https://github.com/settings/tokens/ne
 
 > There are two ways to use this Action.
 
-### Standard
+### Standard mode
 
 Use if you want to simply bump the formula, when a new release happens.
 
@@ -43,7 +43,7 @@ The Action will extract all needed informations by itself, you just need to spec
     force: false # true
 ```
 
-### Livecheck
+### Livecheck mode
 
 If `livecheck` input is set to `true`, the Action will run `brew livecheck` to check if any provided formulae are outdated or if tap contains any outdated formulae and then will run `brew bump-formula-pr` on each of those formulae with proper arguments to bump them.
 
@@ -66,6 +66,8 @@ If there are no outdated formulae, the Action will just exit.
     # Need to set this input if want to use `brew livecheck`
     livecheck: true
 ```
+
+If only `tap` input is provided, all formulae in given tap will be checked and bumped if needed.
 
 ## Examples
 
