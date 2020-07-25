@@ -15,29 +15,33 @@ end
 module Homebrew
   module_function
 
+  def print_command(*cmd)
+    puts "[command]#{cmd.join(' ').gsub("\n", ' ')}"
+  end
+
   def brew(*args)
-    puts "[command]brew #{args.join(' ')}"
+    print_command 'brew', *args
     return if ENV['DEBUG']
 
     safe_system 'brew', *args
   end
 
   def git(*args)
-    puts "[command]git #{args.join(' ')}"
+    print_command 'git', *args
     return if ENV['DEBUG']
 
     safe_system 'git', *args
   end
 
   def read_brew(*args)
-    puts "[command]brew #{args.join(' ')}"
+    print_command 'brew', *args
     return if ENV['DEBUG']
 
     Utils.safe_popen_read('brew', *args).chomp
   end
 
   def read_git(*args)
-    puts "[command]git #{args.join(' ')}"
+    print_command 'git', *args
     return if ENV['DEBUG']
 
     Utils.safe_popen_read('git', *args).chomp
