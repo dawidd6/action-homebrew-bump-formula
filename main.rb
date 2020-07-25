@@ -117,7 +117,7 @@ module Homebrew
          '--no-audit',
          '--no-browse',
          "--message=#{message}",
-         "--version=#{version}",
+         *("--version=#{version}" unless is_git),
          *("--url=#{url}" unless is_git),
          *("--tag=#{tag}" if is_git),
          *("--revision=#{revision}" if is_git),
