@@ -94,7 +94,7 @@ module Homebrew
   message = if message.blank?
               ''
             else
-              "\n\n"
+              message + "\n\n"
             end
   message += '[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
 
