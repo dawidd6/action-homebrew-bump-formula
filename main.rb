@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'formula'
+
 class Object
   def false?
     nil?
