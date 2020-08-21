@@ -65,5 +65,14 @@ inputs:
       If formula and tap inputs are specified - check one or more formulae in that tap.
     required: false
 runs:
-  using: node12
-  main: main.js
+  using: composite
+  steps:
+    - run: brew update-reset
+      shell: bash
+      env:
+        HOMEBREW_COLOR: 1
+    - run: brew ruby $GITHUB_ACTION_PATH/main.rb
+      shell: bash
+      env:
+        HOMEBREW_NO_ENV_FILTERING: 1
+        HOMEBREW_COLOR: 1
