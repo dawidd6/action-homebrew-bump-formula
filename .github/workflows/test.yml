@@ -3,7 +3,7 @@ name: Test Action
 on:
   push:
     branches:
-      - master
+      - '*'
     paths-ignore:
       - README.md
 
