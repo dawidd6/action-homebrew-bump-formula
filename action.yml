@@ -65,5 +65,19 @@ inputs:
       If formula and tap inputs are specified - check one or more formulae in that tap.
     required: false
 runs:
-  using: node12
-  main: main.js
+  using: composite
+  steps:
+    - run: brew update-reset
+      shell: sh
+    - run: brew ruby $GITHUB_ACTION_PATH/main.rb
+      shell: sh
+      env:
+        HOMEBREW_NO_ENV_FILTERING: 1
+        TOKEN: ${{inputs.token}}
+        MESSAGE: ${{inputs.message}}
+        TAP: ${{inputs.tap}}
+        FORMULA: ${{inputs.formula}}
+        TAG: ${{inputs.tag}}
+        REVISION: ${{inputs.revision}}
+        FORCE: ${{inputs.force}}
+        LIVECHECK: ${{inputs.livecheck}}
