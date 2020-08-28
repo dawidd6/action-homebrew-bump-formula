@@ -50,14 +50,14 @@ module Homebrew
   end
 
   # Get inputs
-  token = ENV['INPUT_TOKEN']
-  message = ENV['INPUT_MESSAGE']
-  tap = ENV['INPUT_TAP']
-  formula = ENV['INPUT_FORMULA']
-  tag = ENV['INPUT_TAG']
-  revision = ENV['INPUT_REVISION']
-  force = ENV['INPUT_FORCE']
-  livecheck = ENV['INPUT_LIVECHECK']
+  token = ENV['TOKEN']
+  message = ENV['MESSAGE']
+  tap = ENV['TAP']
+  formula = ENV['FORMULA']
+  tag = ENV['TAG']
+  revision = ENV['REVISION']
+  force = ENV['FORCE']
+  livecheck = ENV['LIVECHECK']
 
   # Set needed HOMEBREW environment variables
   ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
