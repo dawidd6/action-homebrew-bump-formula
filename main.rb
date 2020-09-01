@@ -124,9 +124,6 @@ module Homebrew
          *('--force' unless force.false?),
          formula
   else
-    # Tap livecheck command
-    brew 'tap', 'homebrew/livecheck'
-
     # Support multiple formulae in input and change to full names if tap
     unless formula.blank?
       formula = formula.split(/[ ,\n]/).reject(&:blank?)
