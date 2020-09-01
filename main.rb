@@ -66,8 +66,6 @@ module Homebrew
   if livecheck.false?
     odie "Need 'formula' input specified" if formula.blank?
     odie "Need 'tag' input specified" if tag.blank?
-  elsif tap.blank? && formula.blank?
-    odie "Need 'tap' or 'formula' input specified"
   end
 
   # Get user details
