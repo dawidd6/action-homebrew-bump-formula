@@ -69,8 +69,6 @@ runs:
   steps:
     - run: brew update-reset
       shell: sh
-    - run: brew install pipgrip
-      shell: sh
     - run: brew ruby $GITHUB_ACTION_PATH/main.rb
       shell: sh
       env:
