@@ -155,6 +155,7 @@ module Homebrew
       begin
         # Finally bump the formula
         brew 'bump-formula-pr',
+             '--no-audit',
              '--no-browse',
              "--message=#{message}",
              "--version=#{version}",
