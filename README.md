@@ -81,3 +81,4 @@ If only `tap` input is provided, all formulae in given tap will be checked and b
 - https://github.com/crunchtime-ali/brew-formula-updater/blob/master/.github/workflows/main.yml
 - https://github.com/asciidoc/asciidoc-py3/blob/master/.github/workflows/release.yml
 - https://github.com/bow-swift/nef/blob/master/.github/workflows/bump-formula.yml
+- https://github.com/dandavison/delta/blob/master/.github/workflows/cd.yml
