@@ -31,7 +31,7 @@ The Action will extract all needed informations by itself, you just need to spec
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@v3
   with:
-    # GitHub token, required, not the default one
+    # Required, custom GitHub access token with only the 'public_repo' scope 
     token: ${{secrets.TOKEN}}
     # Optional, defaults to homebrew/core
     tap: USER/REPO
@@ -49,7 +49,7 @@ The Action will extract all needed informations by itself, you just need to spec
 
 If `livecheck` input is set to `true`, the Action will run `brew livecheck` to check if any provided formulae are outdated or if tap contains any outdated formulae and then will run `brew bump-formula-pr` on each of those formulae with proper arguments to bump them.
 
-Might be a good idea to run this on schedule, so one gets automated PRs updating outdated formulae.
+Might be a good idea to run this on schedule in your tap repo, so one gets automated PRs updating outdated formulae.
 
 If there are no outdated formulae, the Action will just exit.
 
@@ -57,7 +57,7 @@ If there are no outdated formulae, the Action will just exit.
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@v3
   with:
-    # GitHub token, required, not the default one
+    # Required, custom GitHub access token with only the 'public_repo' scope enabled
     token: ${{secrets.TOKEN}}
     # Bump all outdated formulae in this tap
     tap: USER/REPO
