@@ -22,18 +22,18 @@ module Homebrew
   end
 
   def brew(*args)
-    print_command 'brew', *args
-    safe_system 'brew', *args
+    print_command HOMEBREW_BREW_FILE, *args
+    safe_system HOMEBREW_BREW_FILE, *args
   end
 
   def git(*args)
-    print_command 'git', *args
-    safe_system 'git', *args
+    print_command HOMEBREW_GIT, *args
+    safe_system HOMEBREW_GIT, *args
   end
 
   def read_brew(*args)
-    print_command 'brew', *args
-    Utils.safe_popen_read('brew', *args).chomp
+    print_command HOMEBREW_BREW_FILE, *args
+    Utils.safe_popen_read(HOMEBREW_BREW_FILE, *args).chomp
   end
 
   # Get inputs
