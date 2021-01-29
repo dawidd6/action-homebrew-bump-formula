@@ -72,6 +72,7 @@ runs:
     - run: brew ruby $GITHUB_ACTION_PATH/main.rb
       shell: sh
       env:
+        HOMEBREW_DEBUG: 1
         HOMEBREW_STDERR: 1
         HOMEBREW_GITHUB_API_TOKEN: ${{inputs.token}}
         HOMEBREW_BUMP_MESSAGE: ${{inputs.message}}
