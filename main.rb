@@ -36,11 +36,6 @@ module Homebrew
     Utils.safe_popen_read('brew', *args).chomp
   end
 
-  def read_git(*args)
-    print_command 'git', *args
-    Utils.safe_popen_read('git', *args).chomp
-  end
-
   # Get inputs
   message = ENV['HOMEBREW_BUMP_MESSAGE']
   tap = ENV['HOMEBREW_BUMP_TAP']
