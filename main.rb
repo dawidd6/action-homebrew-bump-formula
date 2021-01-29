@@ -23,44 +23,32 @@ module Homebrew
 
   def brew(*args)
     print_command 'brew', *args
-    return if ENV['DEBUG']
-
     safe_system 'brew', *args
   end
 
   def git(*args)
     print_command 'git', *args
-    return if ENV['DEBUG']
-
     safe_system 'git', *args
   end
 
   def read_brew(*args)
     print_command 'brew', *args
-    return if ENV['DEBUG']
-
     Utils.safe_popen_read('brew', *args).chomp
   end
 
   def read_git(*args)
     print_command 'git', *args
-    return if ENV['DEBUG']
-
     Utils.safe_popen_read('git', *args).chomp
   end
 
   # Get inputs
-  token = ENV['TOKEN']
-  message = ENV['MESSAGE']
-  tap = ENV['TAP']
-  formula = ENV['FORMULA']
-  tag = ENV['TAG']
-  revision = ENV['REVISION']
-  force = ENV['FORCE']
-  livecheck = ENV['LIVECHECK']
-
-  # Set needed HOMEBREW environment variables
-  ENV['HOMEBREW_GITHUB_API_TOKEN'] = token
+  message = ENV['HOMEBREW_BUMP_MESSAGE']
+  tap = ENV['HOMEBREW_BUMP_TAP']
+  formula = ENV['HOMEBREW_BUMP_FORMULA']
+  tag = ENV['HOMEBREW_BUMP_TAG']
+  revision = ENV['HOMEBREW_BUMP_REVISION']
+  force = ENV['HOMEBREW_BUMP_FORCE']
+  livecheck = ENV['HOMEBREW_BUMP_LIVECHECK']
 
   # Check inputs
   if livecheck.false?

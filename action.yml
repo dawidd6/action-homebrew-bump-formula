@@ -72,12 +72,12 @@ runs:
     - run: brew ruby $GITHUB_ACTION_PATH/main.rb
       shell: sh
       env:
-        HOMEBREW_NO_ENV_FILTERING: 1
-        TOKEN: ${{inputs.token}}
-        MESSAGE: ${{inputs.message}}
-        TAP: ${{inputs.tap}}
-        FORMULA: ${{inputs.formula}}
-        TAG: ${{inputs.tag}}
-        REVISION: ${{inputs.revision}}
-        FORCE: ${{inputs.force}}
-        LIVECHECK: ${{inputs.livecheck}}
+        HOMEBREW_STDERR: 1
+        HOMEBREW_GITHUB_API_TOKEN: ${{inputs.token}}
+        HOMEBREW_BUMP_MESSAGE: ${{inputs.message}}
+        HOMEBREW_BUMP_TAP: ${{inputs.tap}}
+        HOMEBREW_BUMP_FORMULA: ${{inputs.formula}}
+        HOMEBREW_BUMP_TAG: ${{inputs.tag}}
+        HOMEBREW_BUMP_REVISION: ${{inputs.revision}}
+        HOMEBREW_BUMP_FORCE: ${{inputs.force}}
+        HOMEBREW_BUMP_LIVECHECK: ${{inputs.livecheck}}
