@@ -33,7 +33,7 @@ module Homebrew
 
   def read_brew(*args)
     print_command ENV["HOMEBREW_BREW_FILE"], *args
-    output = `#{ENV["HOMEBREW_BREW_FILE"]} #{args.join(' ')})`.chomp
+    output = `#{ENV["HOMEBREW_BREW_FILE"]} #{args.join(' ')}`.chomp
     odie output if $CHILD_STATUS.exitstatus != 0
     output
   end
