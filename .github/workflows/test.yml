@@ -56,7 +56,10 @@ jobs:
         with:
           token: ${{secrets.TOKEN}}
           message: test
-          formula: test-formula-url, test-formula-git-revision
+          formula: |
+            test-formula-url
+            test-formula-git-revision
+            test-formula-pypi-url
           tap: dawidd6/test
           force: true
           livecheck: true
