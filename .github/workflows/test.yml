@@ -3,7 +3,7 @@ name: Test Action
 on:
   push:
     branches:
-      - '*'
+      - "*"
     paths-ignore:
       - README.md
 
@@ -14,6 +14,7 @@ jobs:
         formula:
           - test-formula-url
           - test-formula-git-revision
+          - test-formula-pypi-url
         include:
           - formula: test-formula-url
             tap: dawidd6/test
@@ -23,6 +24,10 @@ jobs:
             tap: dawidd6/test
             tag: v0.3.3
             revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
+            force: true
+          - formula: test-formula-pypi-url
+            tap: dawidd6/test
+            tag: v2.14.2
             force: true
     runs-on: ubuntu-latest
     steps:
