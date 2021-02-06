@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'formula'
+require 'utils/pypi'
 
 class Object
   def false?
@@ -96,6 +97,12 @@ module Homebrew
     tag = tag.delete_prefix 'refs/tags/'
     version = Version.parse tag
     url = stable.url.gsub stable.version, version
+
+    pypi_url = PyPI.update_pypi_url(stable.url, version)
+    if pypi_url
+      url = pypi_url
+      brew 'install', 'pipgrip'
+    end
 
     # Finally bump the formula
     brew 'bump-formula-pr',
