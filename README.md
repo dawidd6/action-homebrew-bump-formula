@@ -82,3 +82,4 @@ If only `tap` input is provided, all formulae in given tap will be checked and b
 - https://github.com/asciidoc/asciidoc-py3/blob/master/.github/workflows/release.yml
 - https://github.com/bow-swift/nef/blob/master/.github/workflows/bump-formula.yml
 - https://github.com/dandavison/delta/blob/master/.github/workflows/cd.yml
+- https://github.com/GitTools/GitVersion/blob/main/.github/workflows/homebrew.yml
