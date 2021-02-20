@@ -8,7 +8,7 @@ It it is recommended to run this Action on `macos` if bumping a formula in core 
 
 ## Usage
 
-One should use the [Personal Access Token](https://github.com/settings/tokens/new?scopes=public_repo) for `token` input to this Action, not the default `GITHUB_TOKEN`, because `brew bump-formula-pr` creates a fork of the formula's tap repository (if needed) and then creates a pull request.
+One should use the [Personal Access Token](https://github.com/settings/tokens/new?scopes=public_repo,workflow) for `token` input to this Action, not the default `GITHUB_TOKEN`, because `brew bump-formula-pr` creates a fork of the formula's tap repository (if needed) and then creates a pull request.
 
 > There are two ways to use this Action.
 
