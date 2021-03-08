@@ -55,7 +55,7 @@ module Homebrew
   end
 
   # Get user details
-  user = GitHub.open_api "#{GitHub::API_URL}/user"
+  user = GitHub::API.open_rest "#{GitHub::API_URL}/user"
   user_id = user['id']
   user_login = user['login']
   user_name = user['name'] || user['login']
