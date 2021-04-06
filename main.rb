@@ -127,6 +127,7 @@ module Homebrew
 
     # Get livecheck info
     json = read_brew 'livecheck',
+                     '--formula',
                      '--quiet',
                      '--newer-only',
                      '--full-name',
