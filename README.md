@@ -33,6 +33,8 @@ The Action will extract all needed informations by itself, you just need to spec
   with:
     # Required, custom GitHub access token with only the 'public_repo' scope 
     token: ${{secrets.TOKEN}}
+    # Optional, will create tap repo fork in organization
+    org: ORG
     # Optional, defaults to homebrew/core
     tap: USER/REPO
     # Formula name, required
@@ -59,6 +61,8 @@ If there are no outdated formulae, the Action will just exit.
   with:
     # Required, custom GitHub access token with only the 'public_repo' scope enabled
     token: ${{secrets.TOKEN}}
+    # Optional, will create tap repo fork in organization
+    org: ORG
     # Bump all outdated formulae in this tap
     tap: USER/REPO
     # Bump only these formulae if outdated

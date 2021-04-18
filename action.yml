@@ -12,6 +12,10 @@ inputs:
     description: |
       Additional message to append to created PR.
     required: false
+  org:
+    description: |
+      Fork tap repository to selected GitHub organization.
+    required: false
   tap:
     description: |
       Formula tap.
@@ -74,6 +78,7 @@ runs:
       env:
         HOMEBREW_GITHUB_API_TOKEN: ${{inputs.token}}
         HOMEBREW_BUMP_MESSAGE: ${{inputs.message}}
+        HOMEBREW_BUMP_ORG: ${{inputs.org}}
         HOMEBREW_BUMP_TAP: ${{inputs.tap}}
         HOMEBREW_BUMP_FORMULA: ${{inputs.formula}}
         HOMEBREW_BUMP_TAG: ${{inputs.tag}}
