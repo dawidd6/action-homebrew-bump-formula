@@ -31,7 +31,7 @@ The Action will extract all needed informations by itself, you just need to spec
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@v3
   with:
-    # Required, custom GitHub access token with only the 'public_repo' scope 
+    # Required, custom GitHub access token with the 'public_repo' and 'workflow' scopes
     token: ${{secrets.TOKEN}}
     # Optional, will create tap repo fork in organization
     org: ORG
