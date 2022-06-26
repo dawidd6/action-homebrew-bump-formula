@@ -7,6 +7,10 @@ on:
     paths-ignore:
       - README.md
 
+concurrency:
+  group: test
+  cancel-in-progress: false
+
 jobs:
   test:
     strategy:
