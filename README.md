@@ -2,9 +2,7 @@
 
 An action that wraps `brew bump-formula-pr` to ease the process of updating the formula on new project releases.
 
-Runs on `ubuntu` and `macos`.
-
-It it is recommended to run this Action on `macos` if bumping a formula in core tap. You can run into issues when doing so on `ubuntu`.
+Works on Ubuntu and macOS runners.
 
 ## Usage
 
