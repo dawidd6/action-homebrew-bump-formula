@@ -71,14 +71,15 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: brew update-reset
+    - run: |
+        echo /home/linuxbrew/.linuxbrew/bin >> $GITHUB_PATH
+        brew update-reset
+      shell: sh
+    - run: |
+        echo /home/linuxbrew/.linuxbrew/bin >> $GITHUB_PATH
+        brew ruby $GITHUB_ACTION_PATH/main.rb
       shell: sh
       env:
-        PATH: /home/linuxbrew/.linuxbrew/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
-    - run: brew ruby $GITHUB_ACTION_PATH/main.rb
-      shell: sh
-      env:
-        PATH: /home/linuxbrew/.linuxbrew/bin:/opt/homebrew/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
         HOMEBREW_GITHUB_API_TOKEN: ${{inputs.token}}
         HOMEBREW_BUMP_MESSAGE: ${{inputs.message}}
         HOMEBREW_BUMP_ORG: ${{inputs.org}}
