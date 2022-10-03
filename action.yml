@@ -73,9 +73,12 @@ runs:
   steps:
     - run: brew update-reset
       shell: sh
+      env:
+        PATH: /home/linuxbrew/.linuxbrew/bin:/opt/homebrew/bin:/usr/local/bin
     - run: brew ruby $GITHUB_ACTION_PATH/main.rb
       shell: sh
       env:
+        PATH: /home/linuxbrew/.linuxbrew/bin:/opt/homebrew/bin:/usr/local/bin
         HOMEBREW_GITHUB_API_TOKEN: ${{inputs.token}}
         HOMEBREW_BUMP_MESSAGE: ${{inputs.message}}
         HOMEBREW_BUMP_ORG: ${{inputs.org}}
