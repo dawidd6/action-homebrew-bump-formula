@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'formula'
-require 'utils/pypi'
 
 class Object
   def false?
@@ -103,15 +102,6 @@ module Homebrew
     version = Version.parse tag
     url = stable.url.gsub stable.version, version
 
-    # Check if formula is originating from PyPi
-    pypi_url = PyPI.update_pypi_url(stable.url, version)
-    if pypi_url
-      # Substitute url
-      url = pypi_url
-      # Install pipgrip utility so resources from PyPi get updated too
-      brew 'install', 'pipgrip'
-    end
-
     # Finally bump the formula
     brew 'bump-formula-pr',
          '--no-audit',
@@ -153,15 +143,6 @@ module Homebrew
       # Get info about formula
       formula = info['formula']
       version = info['version']['latest']
-
-      # Get stable software spec of the formula
-      stable = Formula[formula].stable
-
-      # Check if formula is originating from PyPi
-      if !Formula["pipgrip"].any_version_installed? && PyPI.update_pypi_url(stable.url, version)
-        # Install pipgrip utility so resources from PyPi get updated too
-        brew 'install', 'pipgrip'
-      end
 
       begin
         # Finally bump the formula
