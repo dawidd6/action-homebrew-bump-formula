@@ -74,8 +74,12 @@ module Homebrew
   git 'config', '--global', 'user.name', user_name
   git 'config', '--global', 'user.email', user_email
 
-  # Tap the tap if desired
-  brew 'tap', tap unless tap.blank?
+  # Tap the correct tap
+  if tap.blank?
+    brew 'tap', 'homebrew/core'
+  else
+    brew 'tap', tap
+  end
 
   # Append additional PR message
   message = if message.blank?
