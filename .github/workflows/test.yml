@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Test
         uses: ./
         with:
@@ -54,7 +54,7 @@ jobs:
       - name: Wait
         run: sleep 30
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Test
         uses: ./
         with:
@@ -69,9 +69,6 @@ jobs:
           livecheck: true
   test-livecheck-tap:
     runs-on: ubuntu-latest
-    container:
-      image: homebrew/brew
-      options: --user=root
     needs:
       - test-livecheck-formula
     steps:
