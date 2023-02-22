@@ -71,6 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: homebrew/brew
+      options: --user=root
     needs:
       - test-livecheck-formula
     steps:
