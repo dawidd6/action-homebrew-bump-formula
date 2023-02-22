@@ -31,7 +31,7 @@ jobs:
             force: true
           - formula: test-formula-pypi-url
             tap: dawidd6/test
-            tag: v2.14.2
+            tag: v2.42.0
             force: true
     runs-on: ubuntu-latest
     steps:
