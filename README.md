@@ -33,6 +33,8 @@ The Action will extract all needed informations by itself, you just need to spec
     token: ${{secrets.TOKEN}}
     # Optional, will create tap repo fork in organization
     org: ORG
+    # Optional, use the origin repository instead of forking
+    no_fork: false
     # Optional, defaults to homebrew/core
     tap: USER/REPO
     # Formula name, required

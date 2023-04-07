@@ -41,6 +41,7 @@ module Homebrew
   # Get inputs
   message = ENV['HOMEBREW_BUMP_MESSAGE']
   org = ENV['HOMEBREW_BUMP_ORG']
+  no_fork = ENV['HOMEBREW_BUMP_NO_FORK']
   tap = ENV['HOMEBREW_BUMP_TAP']
   formula = ENV['HOMEBREW_BUMP_FORMULA']
   tag = ENV['HOMEBREW_BUMP_TAG']
@@ -106,6 +107,7 @@ module Homebrew
          '--no-browse',
          "--message=#{message}",
          *("--fork-org=#{org}" unless org.blank?),
+         *("--no-fork" unless no_fork.false?),
          *("--version=#{version}" unless is_git),
          *("--tag=#{tag}" if is_git),
          *("--revision=#{revision}" if is_git),
@@ -149,6 +151,7 @@ module Homebrew
              "--message=#{message}",
              "--version=#{version}",
              *("--fork-org=#{org}" unless org.blank?),
+             *("--no-fork" unless no_fork.false?),
              *('--force' unless force.false?),
              formula
       rescue ErrorDuringExecution => e
