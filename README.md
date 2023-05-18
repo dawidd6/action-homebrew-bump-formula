@@ -59,8 +59,8 @@ If there are no outdated formulae, the Action will just exit.
 - name: Update Homebrew formula
   uses: dawidd6/action-homebrew-bump-formula@v3
   with:
-    # Required, custom GitHub access token with only the 'public_repo' scope enabled
-    token: ${{secrets.TOKEN}}
+    # Required, custom personal GitHub access token with only the 'public_repo' scope enabled
+    token: ${{secrets.CUSTOM_PERSONAL_ACCESS_TOKEN}}
     # Optional, will create tap repo fork in organization
     org: ORG
     # Bump all outdated formulae in this tap
