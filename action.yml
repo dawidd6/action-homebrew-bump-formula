@@ -8,6 +8,12 @@ inputs:
   token:
     description: GitHub token (not the default one)
     required: true
+  user_name:
+    description: Git user name to commit by.
+    required: false
+  user_email:
+    description: Git user email to commit by.
+    required: false
   message:
     description: |
       Additional message to append to created PR.
@@ -83,6 +89,8 @@ runs:
       shell: sh
       env:
         HOMEBREW_GITHUB_API_TOKEN: ${{inputs.token}}
+        HOMEBREW_GIT_NAME: ${{inputs.user_name}}
+        HOMEBREW_GIT_EMAIL: ${{inputs.user_email}}
         HOMEBREW_BUMP_MESSAGE: ${{inputs.message}}
         HOMEBREW_BUMP_ORG: ${{inputs.org}}
         HOMEBREW_BUMP_NO_FORK: ${{inputs.no_fork}}

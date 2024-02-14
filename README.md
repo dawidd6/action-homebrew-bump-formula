@@ -31,6 +31,10 @@ The Action will extract all needed informations by itself, you just need to spec
   with:
     # Required, custom GitHub access token with the 'public_repo' and 'workflow' scopes
     token: ${{secrets.TOKEN}}
+    # Optional, will commit with this user name
+    user_name: name
+    # Optional, will commit with this user email
+    user_email: email@example.com
     # Optional, will create tap repo fork in organization
     org: ORG
     # Optional, use the origin repository instead of forking
@@ -61,6 +65,10 @@ If there are no outdated formulae, the Action will just exit.
   with:
     # Required, custom personal GitHub access token with only the 'public_repo' scope enabled
     token: ${{secrets.CUSTOM_PERSONAL_ACCESS_TOKEN}}
+    # Optional, will commit with this user name
+    user_name: user_name
+    # Optional, will commit with this user email
+    user_email: email@example.com
     # Optional, will create tap repo fork in organization
     org: ORG
     # Bump all outdated formulae in this tap
