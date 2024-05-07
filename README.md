@@ -20,7 +20,7 @@ Listen for new tags in workflow:
 on:
   # trigger when release got created (preferred)
   release:
-    types: [created]
+    types: [released]
   # trigger on tag push
   # push:
   #   tags:
