@@ -45,6 +45,7 @@ module Homebrew
   org = ENV['HOMEBREW_BUMP_ORG']
   no_fork = ENV['HOMEBREW_BUMP_NO_FORK']
   tap = ENV['HOMEBREW_BUMP_TAP']
+  tap_url = ENV['HOMEBREW_BUMP_TAP_URL']
   formula = ENV['HOMEBREW_BUMP_FORMULA']
   tag = ENV['HOMEBREW_BUMP_TAG']
   revision = ENV['HOMEBREW_BUMP_REVISION']
@@ -80,7 +81,7 @@ module Homebrew
     brew 'tap', 'homebrew/core', '--force'
   else
     # Tap the requested tap if applicable
-    brew 'tap', tap
+    brew 'tap', tap, *(tap_url unless tap_url.blank?)
   end
 
   # Append additional PR message

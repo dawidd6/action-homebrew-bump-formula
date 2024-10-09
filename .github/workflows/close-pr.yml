@@ -1,0 +1,22 @@
+name: Close Pull Request
+
+on:
+  pull_request:
+    types:
+      - opened
+    paths:
+      - "Formula/*.rb"
+
+concurrency:
+  group: close-pr
+  cancel-in-progress: false
+
+jobs:
+  close-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Delete
+        run: git push origin --delete ${{github.event.pull_request.head.ref}}

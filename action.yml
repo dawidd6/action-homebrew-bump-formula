@@ -36,6 +36,16 @@ inputs:
       Example: dawidd6/tap
       Example: dawidd6/homebrew-tap
     required: false
+  tap_url:
+    description: |
+      Formula tap URL.
+
+      Specify this if you don't have the repository named $USER/homebrew-$TAP.
+      Or if your tap is hosted somewhere else.
+      If you specify this input, the `tap` input needs to be set too.
+
+      Example: http://github.com/dawidd6/action-homebrew-bump-formula.git
+    required: false
   formula:
     description: |
       Formula name.
@@ -95,6 +105,7 @@ runs:
         HOMEBREW_BUMP_ORG: ${{inputs.org}}
         HOMEBREW_BUMP_NO_FORK: ${{inputs.no_fork}}
         HOMEBREW_BUMP_TAP: ${{inputs.tap}}
+        HOMEBREW_BUMP_TAP_URL: ${{inputs.tap_url}}
         HOMEBREW_BUMP_FORMULA: ${{inputs.formula}}
         HOMEBREW_BUMP_TAG: ${{inputs.tag}}
         HOMEBREW_BUMP_REVISION: ${{inputs.revision}}
