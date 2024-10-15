@@ -92,6 +92,11 @@ module Homebrew
             end
   message += '[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
 
+  unless force.false?
+    brew_repo = read_brew '--repository'
+    git '-C', brew_repo, 'apply', "#{__dir__}/brew-bump-formula-pr.rb.patch"
+  end
+
   # Do the livecheck stuff or not
   if livecheck.false?
     # Change formula name to full name
@@ -115,8 +120,6 @@ module Homebrew
          *("--version=#{version}" unless is_git),
          *("--tag=#{tag}" if is_git),
          *("--revision=#{revision}" if is_git),
-         *('--force' unless force.false?),
-         *('--quiet' unless force.false?),
          formula
   else
     # Support multiple formulae in input and change to full names if tap
@@ -157,8 +160,6 @@ module Homebrew
              "--version=#{version}",
              *("--fork-org=#{org}" unless org.blank?),
              *("--no-fork" unless no_fork.false?),
-             *('--force' unless force.false?),
-             *('--quiet' unless force.false?),
              formula
       rescue ErrorDuringExecution => e
         # Continue execution on error, but save the exeception
