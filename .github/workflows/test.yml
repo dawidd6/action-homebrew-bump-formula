@@ -43,9 +43,9 @@ jobs:
       - test
     steps:
       - name: Wait
-        run: sleep 30
+        run: sleep 60
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Test
         uses: ./
         with:
@@ -56,7 +56,7 @@ jobs:
             test-formula-git-revision
             test-formula-pypi-url
           tap: ${{github.repository}}
-          tap_url: ${{github.server_url}}/${{github.repository}}.git
+          tap_url: ${{github.server_url}}/${{github.repository}}
           livecheck: true
   test-livecheck-tap:
     runs-on: ubuntu-latest
@@ -64,9 +64,9 @@ jobs:
       - test-livecheck-formula
     steps:
       - name: Wait
-        run: sleep 30
+        run: sleep 60
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Test
         uses: ./
         with:
@@ -75,5 +75,5 @@ jobs:
             First line
             SECOND LINE
           tap: ${{github.repository}}
-          tap_url: ${{github.server_url}}/${{github.repository}}.git
+          tap_url: ${{github.server_url}}/${{github.repository}}
           livecheck: true
