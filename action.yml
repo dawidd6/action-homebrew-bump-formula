@@ -92,7 +92,7 @@ runs:
   using: composite
   steps:
     - run: echo /home/linuxbrew/.linuxbrew/bin >> $GITHUB_PATH
-      if: ${{runner.os == "Linux"}}
+      if: ${{runner.os == 'Linux'}}
       shell: sh
     - run: brew developer on
       shell: sh
