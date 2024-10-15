@@ -28,6 +28,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Test
         uses: ./
         with:
@@ -44,9 +45,11 @@ jobs:
       - test
     steps:
       - name: Wait
-        run: sleep 60
+        run: sleep 30
+
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Test
         uses: ./
         with:
@@ -66,9 +69,11 @@ jobs:
       - test-livecheck-formula
     steps:
       - name: Wait
-        run: sleep 60
+        run: sleep 30
+
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Test
         uses: ./
         with:
