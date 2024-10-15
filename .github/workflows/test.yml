@@ -27,18 +27,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Test
         uses: ./
         with:
           token: ${{secrets.TOKEN}}
           tap: ${{github.repository}}
-          tap_url: ${{github.server_url}}/${{github.repository}}.git
+          tap_url: ${{github.server_url}}/${{github.repository}}
           formula: ${{matrix.formula}}
           tag: ${{matrix.tag}}
           revision: ${{matrix.revision}}
-          force: true
-          no_fork: true
   test-livecheck-formula:
     runs-on: macos-latest
     needs:
@@ -59,9 +57,7 @@ jobs:
             test-formula-pypi-url
           tap: ${{github.repository}}
           tap_url: ${{github.server_url}}/${{github.repository}}.git
-          force: true
           livecheck: true
-          no_fork: true
   test-livecheck-tap:
     runs-on: ubuntu-latest
     needs:
@@ -80,6 +76,4 @@ jobs:
             SECOND LINE
           tap: ${{github.repository}}
           tap_url: ${{github.server_url}}/${{github.repository}}.git
-          force: true
           livecheck: true
-          no_fork: true
