@@ -18,5 +18,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Wait
+        run: sleep 60s
+
       - name: Delete
         run: git push origin --delete ${{github.event.pull_request.head.ref}}
