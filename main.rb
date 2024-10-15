@@ -94,7 +94,7 @@ module Homebrew
 
   unless force.false?
     brew_repo = read_brew '--repository'
-    git '-C', brew_repo, 'apply', "#{__dir__}/brew-bump-formula-pr.rb.patch"
+    git '-C', brew_repo, 'apply', "#{__dir__}/bump-formula-pr.rb.patch"
   end
 
   # Do the livecheck stuff or not
