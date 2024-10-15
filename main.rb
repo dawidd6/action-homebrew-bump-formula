@@ -120,6 +120,7 @@ module Homebrew
          *("--version=#{version}" unless is_git),
          *("--tag=#{tag}" if is_git),
          *("--revision=#{revision}" if is_git),
+         *("--force" unless force.false?),
          formula
   else
     # Support multiple formulae in input and change to full names if tap
@@ -160,6 +161,7 @@ module Homebrew
              "--version=#{version}",
              *("--fork-org=#{org}" unless org.blank?),
              *("--no-fork" unless no_fork.false?),
+             *("--force" unless force.false?),
              formula
       rescue ErrorDuringExecution => e
         # Continue execution on error, but save the exeception
