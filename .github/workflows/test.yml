@@ -37,6 +37,7 @@ jobs:
           formula: ${{matrix.formula}}
           tag: ${{matrix.tag}}
           revision: ${{matrix.revision}}
+          force: true
   test-livecheck-formula:
     runs-on: macos-latest
     needs:
@@ -58,6 +59,7 @@ jobs:
           tap: ${{github.repository}}
           tap_url: ${{github.server_url}}/${{github.repository}}
           livecheck: true
+          force: true
   test-livecheck-tap:
     runs-on: ubuntu-latest
     needs:
@@ -77,3 +79,4 @@ jobs:
           tap: ${{github.repository}}
           tap_url: ${{github.server_url}}/${{github.repository}}
           livecheck: true
+          force: true

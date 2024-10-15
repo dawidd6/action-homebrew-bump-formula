@@ -91,20 +91,13 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: echo $PATH
-      shell: sh
     - run: echo /home/linuxbrew/.linuxbrew/bin >> $GITHUB_PATH
+      if: ${{runner.os == "Linux"}}
       shell: sh
     - run: brew developer on
       shell: sh
     - run: brew update-reset
       shell: sh
-    #- shell: sh
-    #  run: |
-    #    cd /home/linuxbrew/.linuxbrew/Homebrew
-    #    git remote set-url origin https://github.com/dawidd6/brew
-    #    git pull origin test
-    #    git checkout test
     - run: brew ruby $GITHUB_ACTION_PATH/main.rb
       shell: sh
       env:
