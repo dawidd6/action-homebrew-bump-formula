@@ -31,7 +31,7 @@ The Action will extract all needed informations by itself, you just need to spec
 
 ```yaml
 - name: Update Homebrew formula
-  uses: dawidd6/action-homebrew-bump-formula@v4
+  uses: dawidd6/action-homebrew-bump-formula@v5
   with:
     # Required, custom GitHub access token with the 'public_repo' and 'workflow' scopes
     token: ${{secrets.TOKEN}}
