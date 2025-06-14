@@ -2,8 +2,8 @@ class TestFormulaGitRevision < Formula
   desc "Formula to test Action"
   homepage "https://github.com/Debian/dh-make-golang"
   url "https://github.com/Debian/dh-make-golang.git",
-    tag:      "v0.3.2",
-    revision: "82916c0d56b6319398f635199222dff397fafc12"
+    tag:      "v0.8.0",
+    revision: "5def67d96a402228d52ef6515e67a129f0aa3cd9"
   license "MIT"
   head "https://github.com/Debian/dh-make-golang.git"
 
