@@ -15,6 +15,7 @@ class String
 end
 
 module Homebrew
+  extend Utils::Output::Mixin
   module_function
 
   def print_command(*cmd)
