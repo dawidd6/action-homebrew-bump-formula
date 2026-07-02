@@ -23,7 +23,7 @@ jobs:
             tag: v0.3.3
             revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
           - formula: test-formula-pypi-url
-            tag: v2.42.0
+            tag: v2.41.0
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
