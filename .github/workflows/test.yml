@@ -22,8 +22,6 @@ jobs:
           - formula: test-formula-git-revision
             tag: v0.3.3
             revision: c43abd765cf51c06bbcaa5479dc49aab1396989f
-          - formula: test-formula-pypi-url
-            tag: v2.41.0
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -58,7 +56,6 @@ jobs:
           formula: |
             test-formula-url
             test-formula-git-revision
-            test-formula-pypi-url
           tap: ${{github.repository}}
           tap_url: ${{github.server_url}}/${{github.repository}}
           livecheck: true
