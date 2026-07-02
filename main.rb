@@ -88,6 +88,7 @@ module Homebrew
   else
     # Tap the requested tap if applicable
     brew 'tap', tap, *(tap_url unless tap_url.blank?)
+    brew 'trust', tap
   end
 
   # Append additional PR message
