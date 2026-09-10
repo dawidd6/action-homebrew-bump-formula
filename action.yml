@@ -46,6 +46,14 @@ inputs:
 
       Example: http://github.com/dawidd6/action-homebrew-bump-formula.git
     required: false
+  branch:
+    description: |
+      Tap branch to bump against.
+
+      Defaults to the tap's default branch.
+
+      Example: dev
+    required: false
   formula:
     description: |
       Formula name.
@@ -107,6 +115,7 @@ runs:
         HOMEBREW_BUMP_NO_FORK: ${{inputs.no_fork}}
         HOMEBREW_BUMP_TAP: ${{inputs.tap}}
         HOMEBREW_BUMP_TAP_URL: ${{inputs.tap_url}}
+        HOMEBREW_BUMP_BRANCH: ${{inputs.branch}}
         HOMEBREW_BUMP_FORMULA: ${{inputs.formula}}
         HOMEBREW_BUMP_TAG: ${{inputs.tag}}
         HOMEBREW_BUMP_REVISION: ${{inputs.revision}}

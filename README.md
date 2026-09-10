@@ -45,6 +45,8 @@ The Action will extract all needed informations by itself, you just need to spec
     no_fork: false
     # Optional, defaults to homebrew/core
     tap: USER/REPO
+    # Optional, defaults to the tap's default branch
+    branch: BRANCH
     # Formula name, required
     formula: FORMULA
     # Optional, will be determined automatically
