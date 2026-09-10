@@ -16,6 +16,7 @@ end
 
 module Homebrew
   extend Utils::Output::Mixin
+  extend SystemCommand::Helpers
   module_function
 
   def print_command(*cmd)
