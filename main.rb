@@ -100,10 +100,16 @@ module Homebrew
             end
   message += '[`action-homebrew-bump-formula`](https://github.com/dawidd6/action-homebrew-bump-formula)'
 
-  unless force.false?
-    brew_repo = read_brew '--repository'
-    git '-C', brew_repo, 'apply', "#{__dir__}/bump-formula-pr.rb.patch"
-  end
+  brew_repo = read_brew '--repository'
+
+  # Bypass the PyPI release cooldown for the bumped formula's own package,
+  # otherwise bumping right after a release fails to resolve resources.
+  # Dependencies still respect the cooldown and official taps are unaffected.
+  # This is what `brew update-python-resources --ignore-main-package-cooldown`
+  # does, but `brew bump-formula-pr` doesn't expose it.
+  git '-C', brew_repo, 'apply', "#{__dir__}/bump-formula-pr-cooldown.rb.patch"
+
+  git '-C', brew_repo, 'apply', "#{__dir__}/bump-formula-pr.rb.patch" unless force.false?
 
   # Do the livecheck stuff or not
   if livecheck.false?

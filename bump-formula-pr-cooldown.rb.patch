@@ -1,0 +1,14 @@
+diff --git a/Library/Homebrew/dev-cmd/bump-formula-pr.rb b/Library/Homebrew/dev-cmd/bump-formula-pr.rb
+index 3261b6ebf7..458060eb68 100644
+--- a/Library/Homebrew/dev-cmd/bump-formula-pr.rb
++++ b/Library/Homebrew/dev-cmd/bump-formula-pr.rb
+@@ -334,7 +334,8 @@ module Homebrew
+                                                               exclude_packages:         args.python_exclude_packages,
+                                                               install_dependencies:     args.install_dependencies?,
+                                                               quiet:                    args.quiet?,
+-                                                              ignore_non_pypi_packages: true
++                                                              ignore_non_pypi_packages: true,
++                                                              ignore_main_package_cooldown: !formula.tap&.official?
+ 
+             resource_versions = parse_resource_versions_arg
+             resource_update_results.merge!(
