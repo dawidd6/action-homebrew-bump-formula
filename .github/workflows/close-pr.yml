@@ -15,10 +15,11 @@ jobs:
   close-pr:
     permissions:
       contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: Delete
+      - name: Close
         env:
           GH_TOKEN: ${{github.token}}
-          BRANCH: ${{github.event.pull_request.head.ref}}
-        run: gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/$BRANCH"
+          PR: ${{github.event.pull_request.number}}
+        run: gh pr close --delete-branch --repo "$GITHUB_REPOSITORY" "$PR"
