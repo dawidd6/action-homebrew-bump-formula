@@ -13,10 +13,16 @@ concurrency:
 
 jobs:
   close-pr:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7 # zizmor: ignore[unpinned-uses]
+        with:
+          persist-credentials: false
 
       - name: Delete
-        run: git push origin --delete ${{github.event.pull_request.head.ref}}
+        env:
+          BRANCH: ${{github.event.pull_request.head.ref}}
+        run: git push origin --delete "$BRANCH"

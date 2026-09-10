@@ -12,6 +12,9 @@ concurrency:
   group: test
   cancel-in-progress: false
 
+permissions:
+  contents: read
+
 jobs:
   test:
     strategy:
@@ -25,10 +28,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7 # zizmor: ignore[unpinned-uses]
+        with:
+          persist-credentials: false
 
       - name: Test
-        uses: ./
+        uses: $/
         with:
           token: ${{secrets.TOKEN}}
           tap: ${{github.repository}}
@@ -46,10 +51,12 @@ jobs:
         run: sleep 30
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7 # zizmor: ignore[unpinned-uses]
+        with:
+          persist-credentials: false
 
       - name: Test
-        uses: ./
+        uses: $/
         with:
           token: ${{secrets.TOKEN}}
           message: test
@@ -69,10 +76,12 @@ jobs:
         run: sleep 30
 
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7 # zizmor: ignore[unpinned-uses]
+        with:
+          persist-credentials: false
 
       - name: Test
-        uses: ./
+        uses: $/
         with:
           token: ${{secrets.TOKEN}}
           message: |
