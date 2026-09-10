@@ -39,6 +39,8 @@ The Action will extract all needed informations by itself, you just need to spec
     user_name: name
     # Optional, will commit with this user email
     user_email: email@example.com
+    # Optional, additional text to prepend to the created PR's body
+    message: For additional details see ${{github.event.release.html_url}}
     # Optional, will create tap repo fork in organization
     org: ORG
     # Optional, use the origin repository instead of forking
@@ -75,6 +77,8 @@ If there are no outdated formulae, the Action will just exit.
     user_name: user_name
     # Optional, will commit with this user email
     user_email: email@example.com
+    # Optional, additional text to prepend to the created PR's body
+    message: Bumped by a scheduled livecheck run
     # Optional, will create tap repo fork in organization
     org: ORG
     # Bump all outdated formulae in this tap
@@ -88,6 +92,12 @@ If there are no outdated formulae, the Action will just exit.
 ```
 
 If only `tap` input is provided, all formulae in given tap will be checked and bumped if needed.
+
+## Requirements
+
+The formula's `url` must contain its version verbatim, since `brew bump-formula-pr` builds the new URL by substituting the version string into the old one. For version `1.2.3`, a `foo-1.2.3.tar.gz` or `foo-1_2_3.tar.gz` URL is fine, `foo-123.tar.gz` is not - such formulae need `brew bump-formula-pr --url` and can't be bumped by this Action.
+
+Formulae using the git download strategy are exempt, as they are bumped by tag and revision instead.
 
 ## Examples
 
