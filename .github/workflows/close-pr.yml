@@ -17,12 +17,8 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7 # zizmor: ignore[unpinned-uses]
-        with:
-          persist-credentials: false
-
       - name: Delete
         env:
+          GH_TOKEN: ${{github.token}}
           BRANCH: ${{github.event.pull_request.head.ref}}
-        run: git push origin --delete "$BRANCH"
+        run: gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/heads/$BRANCH"
